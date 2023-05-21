@@ -265,6 +265,71 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_cli}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cidadeId\": 1,\r\n    \"rua\": \"Rua Brasil\",\r\n    \"numero\": \"199\",\r\n    \"bairro\": \"Centro\",\r\n    \"cep\": \"15805-001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/enderecos/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"enderecos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_cli}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/enderecos/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"enderecos",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -311,7 +376,7 @@
 		},
 		{
 			"key": "token_cli",
-			"value": "Mw.DpqQ7PZZE3mJxQETbQzKVgJBKXA4TyM0acwWXrv3hzmgm97PJ0BoWQUjrL4B",
+			"value": "NA.OwGEPs2gkwj8pe-jU0HFXuCBolpAtCw4XEDTy_3rO1q3ZoFns50IG7YX94Nk",
 			"type": "default"
 		}
 	]
