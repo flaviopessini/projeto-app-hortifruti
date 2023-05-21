@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Produto from './Produto'
 
 export default class Categoria extends BaseModel {
   @column({ isPrimary: true })
@@ -20,6 +21,12 @@ export default class Categoria extends BaseModel {
   @column({ columnName: 'estabelecimento_id' })
   public estabelecimentoId: number
 
+  @hasMany(() => Produto, {
+    foreignKey: 'categoria_id',
+    localKey: 'id',
+  })
+  public produtos: HasMany<typeof Produto>
+
   @column.dateTime({ columnName: 'created_at', autoCreate: true })
   public createdAt: DateTime
 
@@ -27,5 +34,5 @@ export default class Categoria extends BaseModel {
   public updatedAt: DateTime
 
   @column.dateTime({ columnName: 'deleted_at' })
-  public deletedAt: DateTime
+  public deletedAt: DateTime | null
 }

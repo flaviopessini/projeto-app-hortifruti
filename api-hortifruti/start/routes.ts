@@ -23,6 +23,10 @@ import Route from '@ioc:Adonis/Core/Route'
 // Rota de cadastro para o usuário do tipo cliente
 Route.post('/cliente/cadastro', 'ClientesController.store')
 
+// Rota de cidades
+Route.get('/cidades', 'CidadesController.index')
+Route.get('/cidades/:id/estabelecimentos', 'CidadesController.estabelecimentos')
+
 // Rotas de login para os 3 tipos de usuários
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout')
@@ -32,10 +36,12 @@ Route.group(() => {
   // Rota para dados do usuário autenticado
   Route.get('/auth/me', 'AuthController.me')
 
+  Route.resource('/enderecos', 'EnderecosController').only(['store', 'index', 'update'])
+
   // Rota para editar dados do cliente
   Route.put('/cliente', 'ClientesController.update')
 }).middleware('auth')
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return { hello: 'hello world' }
 })

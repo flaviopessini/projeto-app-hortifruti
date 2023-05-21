@@ -37,5 +37,5 @@ export default class Produto extends BaseModel {
   public updatedAt: DateTime
 
   @column.dateTime({ columnName: 'deleted_at' })
-  public deletedAt: DateTime
+  public deletedAt: DateTime | null
 }

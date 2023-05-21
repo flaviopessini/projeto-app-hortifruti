@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasOne, ManyToMany, column, hasOne, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Estado from './Estado'
+import Estabelecimento from './Estabelecimento'
 
 export default class Cidade extends BaseModel {
   @column({ isPrimary: true })
@@ -13,6 +15,21 @@ export default class Cidade extends BaseModel {
 
   @column({ columnName: 'ativo' })
   public ativo: boolean
+
+  @hasOne(() => Estado, {
+    foreignKey: 'id',
+    localKey: 'estadoId',
+  })
+  public estado: HasOne<typeof Estado>
+
+  @manyToMany(() => Estabelecimento, {
+    pivotTable: 'cidades_estabelecimentos',
+    localKey: 'id',
+    pivotForeignKey: 'cidade_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'estabelecimento_id',
+  })
+  public estabelecimentos: ManyToMany<typeof Estabelecimento>
 
   @column.dateTime({ columnName: 'created_at', autoCreate: true })
   public createdAt: DateTime
