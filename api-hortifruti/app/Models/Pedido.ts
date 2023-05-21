@@ -1,5 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, HasOne, column, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import Cliente from './Cliente'
+import Status from './Status'
+import { SystemMimeTypeEntryDefinition } from '@faker-js/faker'
+import PedidoStatus from './PedidoStatus'
 
 export default class Pedido extends BaseModel {
   @column({ isPrimary: true, serializeAs: null })
@@ -37,4 +41,16 @@ export default class Pedido extends BaseModel {
 
   @column.dateTime({ columnName: 'updated_at', autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasOne(() => Cliente, {
+    localKey: 'clienteId',
+    foreignKey: 'id',
+  })
+  public cliente: HasOne<typeof Cliente>
+
+  @hasMany(() => PedidoStatus, {
+    localKey: 'id',
+    foreignKey: 'pedidoId',
+  })
+  public pedidoStatus: HasMany<typeof PedidoStatus>
 }

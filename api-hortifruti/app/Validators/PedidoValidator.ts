@@ -24,14 +24,17 @@ export default class PedidoValidator {
    *    ```
    */
   public schema = schema.create({
-    hashId: schema.string({ trim: true }, [rules.required()]),
-    clienteId: schema.number([rules.required()]),
-    estabelecimentoId: schema.number([rules.required()]),
-    meioPagamentoId: schema.number([rules.required()]),
-    pedidoEnderecoId: schema.number([rules.required()]),
-    valor: schema.number([rules.required()]),
+    estabelecimentoId: schema.number([rules.exists({ table: 'meios_pagamentos', column: 'id' })]),
+    meioPagamentoId: schema.number([rules.exists({ table: 'meios_pagamentos', column: 'id' })]),
+    produtos: schema.array([rules.minLength(1)]).members(
+      schema.object().members({
+        produtoId: schema.number([rules.exists({ table: 'produtos', column: 'id' })]),
+        quantidade: schema.number([rules.required()]),
+        observacao: schema.string.nullableAndOptional({ trim: true }),
+      })
+    ),
+    enderecoId: schema.number([rules.exists({ table: 'enderecos', column: 'id' })]),
     trocoPara: schema.number([rules.required()]),
-    custoEntrega: schema.number([rules.required()]),
     observacao: schema.string.nullableAndOptional(),
   })
 

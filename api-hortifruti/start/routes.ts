@@ -31,12 +31,23 @@ Route.get('/cidades/:id/estabelecimentos', 'CidadesController.estabelecimentos')
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout')
 
+// Rota publica para buscar informações de um estabelecimento
+Route.get('/estabelecimentos/:id', 'EstabelecimentosController.show')
+
 // Rotas para usuário autenticado
 Route.group(() => {
   // Rota para dados do usuário autenticado
   Route.get('/auth/me', 'AuthController.me')
 
+  // Rota para pedidos
+  Route.post('/pedidos', 'PedidosController.store')
+  Route.get('/pedidos', 'PedidosController.index')
+
+  // Grupo de rotas para endereço
   Route.resource('/enderecos', 'EnderecosController').only(['store', 'index', 'update', 'destroy'])
+
+  // Rota de estabelecimento autenticado
+  Route.get('/estabelecimento/pedidos', 'EstabelecimentosController.pedidos')
 
   // Rota para editar dados do cliente
   Route.put('/cliente', 'ClientesController.update')
