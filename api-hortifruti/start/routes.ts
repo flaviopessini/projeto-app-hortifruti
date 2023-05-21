@@ -36,7 +36,7 @@ Route.group(() => {
   // Rota para dados do usuário autenticado
   Route.get('/auth/me', 'AuthController.me')
 
-  Route.resource('/enderecos', 'EnderecosController').only(['store', 'index', 'update'])
+  Route.resource('/enderecos', 'EnderecosController').only(['store', 'index', 'update', 'destroy'])
 
   // Rota para editar dados do cliente
   Route.put('/cliente', 'ClientesController.update')
