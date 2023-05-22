@@ -42,6 +42,7 @@ Route.group(() => {
   // Rota para pedidos
   Route.post('/pedidos', 'PedidosController.store')
   Route.get('/pedidos', 'PedidosController.index')
+  Route.get('/pedidos/:hashId', 'PedidosController.show')
 
   // Grupo de rotas para endereço
   Route.resource('/enderecos', 'EnderecosController').only(['store', 'index', 'update', 'destroy'])

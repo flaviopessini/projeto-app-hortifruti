@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "69e739db-8589-41a1-8f23-1098861451e5",
+		"_postman_id": "c41fdb12-700c-49e2-a601-735cc38c7fb9",
 		"name": "api-hortifruti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -42,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"cliente.01@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"email\": \"cliente@email.com\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -334,6 +334,102 @@
 			]
 		},
 		{
+			"name": "pedidos",
+			"item": [
+				{
+					"name": "cadastro",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_cli}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"estabelecimentoId\": 12,\n    \"meioPagamentoId\": 1,\n    \"trocoPara\": 0,\n    \"observacao\": \"\",\n    \"enderecoId\": 1,\n    \"produtos\": [\n        {\n            \"produtoId\": 1,\n            \"quantidade\": 1,\n            \"observacao\": \"\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pedidos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "busca",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_cli}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pedidos/NRFNO1XK",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pedidos",
+								"NRFNO1XK"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_cli}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pedidos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "index",
 			"request": {
 				"method": "GET",
@@ -376,7 +472,7 @@
 		},
 		{
 			"key": "token_cli",
-			"value": "NA.OwGEPs2gkwj8pe-jU0HFXuCBolpAtCw4XEDTy_3rO1q3ZoFns50IG7YX94Nk",
+			"value": "MQ.XoO6l6zR0HTX6EejaYZF3vgPpgWxVfiyumdTUw0rsSMkq6VTK3YqsAwlTULK",
 			"type": "default"
 		}
 	]

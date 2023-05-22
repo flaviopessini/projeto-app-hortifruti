@@ -24,7 +24,7 @@ export default class PedidoValidator {
    *    ```
    */
   public schema = schema.create({
-    estabelecimentoId: schema.number([rules.exists({ table: 'meios_pagamentos', column: 'id' })]),
+    estabelecimentoId: schema.number([rules.exists({ table: 'estabelecimentos', column: 'id' })]),
     meioPagamentoId: schema.number([rules.exists({ table: 'meios_pagamentos', column: 'id' })]),
     produtos: schema.array([rules.minLength(1)]).members(
       schema.object().members({

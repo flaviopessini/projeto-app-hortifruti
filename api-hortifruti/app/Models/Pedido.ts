@@ -1,9 +1,11 @@
 import { DateTime } from 'luxon'
 import { BaseModel, HasMany, HasOne, column, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import Cliente from './Cliente'
-import Status from './Status'
-import { SystemMimeTypeEntryDefinition } from '@faker-js/faker'
 import PedidoStatus from './PedidoStatus'
+import Estabelecimento from './Estabelecimento'
+import PedidoProduto from './PedidoProduto'
+import PedidoEndereco from './PedidoEndereco'
+import MeioPagamento from './MeioPagamento'
 
 export default class Pedido extends BaseModel {
   @column({ isPrimary: true, serializeAs: null })
@@ -53,4 +55,28 @@ export default class Pedido extends BaseModel {
     foreignKey: 'pedidoId',
   })
   public pedidoStatus: HasMany<typeof PedidoStatus>
+
+  @hasOne(() => Estabelecimento, {
+    localKey: 'estabelecimentoId',
+    foreignKey: 'id',
+  })
+  public estabelecimento: HasOne<typeof Estabelecimento>
+
+  @hasMany(() => PedidoProduto, {
+    foreignKey: 'pedidoId',
+    localKey: 'id',
+  })
+  public produtos: HasMany<typeof PedidoProduto>
+
+  @hasOne(() => PedidoEndereco, {
+    localKey: 'pedidoEnderecoId',
+    foreignKey: 'id',
+  })
+  public endereco: HasOne<typeof PedidoEndereco>
+
+  @hasOne(() => MeioPagamento, {
+    localKey: 'meioPagamentoId',
+    foreignKey: 'id',
+  })
+  public meioPagamento: HasOne<typeof MeioPagamento>
 }

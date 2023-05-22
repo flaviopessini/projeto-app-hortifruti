@@ -12,9 +12,42 @@ import PedidoValidator from 'App/Validators/PedidoValidator'
 var randomstring = require('randomstring')
 
 export default class PedidosController {
-  public async index({}: HttpContextContract) {}
+  public async index({ response, auth }: HttpContextContract) {
+    const loggedUser = await auth.use('api').authenticate()
+    const cliente = await Cliente.findByOrFail('userId', loggedUser.id)
+    const pedidos = await Pedido.query()
+      .where('clienteId', cliente.id)
+      .preload('estabelecimento')
+      .preload('pedidoStatus', (statusQuery) => {
+        statusQuery.preload('status')
+      })
+      .orderBy('id', 'desc')
 
-  public async show({}: HttpContextContract) {}
+    return response.ok(pedidos)
+  }
+
+  public async show({ response, params }: HttpContextContract) {
+    const hashId = params.hashId
+    const pedido = await Pedido.query()
+      .where('hashId', hashId)
+      .preload('produtos', (produtosQuery) => {
+        produtosQuery.preload('produto')
+      })
+      .preload('cliente')
+      .preload('endereco')
+      .preload('estabelecimento')
+      .preload('meioPagamento')
+      .preload('pedidoStatus', (statusQuery) => {
+        statusQuery.preload('status')
+      })
+      .first()
+
+    if (pedido === null) {
+      return response.notFound('Pedido não encontrado')
+    }
+
+    return response.ok(pedido)
+  }
 
   public async store({ request, response, auth }: HttpContextContract) {
     const payload = await request.validate(PedidoValidator)
@@ -59,16 +92,19 @@ export default class PedidosController {
         .where('cidadeId', endereco.cidadeId)
         .firstOrFail()
 
-      let valorTotal: number = 0
+      let valorTotal = 0
       for await (const prod of payload.produtos) {
         const produto = await Produto.findByOrFail('id', prod.produtoId)
         valorTotal += produto.preco * prod.quantidade
       }
 
-      valorTotal += estabelecimentoCidade.custoEntrega
+      valorTotal = estabelecimentoCidade
+        ? valorTotal + parseFloat(estabelecimentoCidade.custoEntrega.toString())
+        : valorTotal
+
       valorTotal = parseFloat(valorTotal.toFixed(2))
 
-      if (payload.trocoPara !== null && payload.trocoPara < valorTotal) {
+      if (payload.trocoPara > 0 && payload.trocoPara < valorTotal) {
         await trx.rollback()
         return response.badRequest(
           'O valor do troco não pode ser menor que o valor total do pedido'
@@ -108,9 +144,11 @@ export default class PedidosController {
 
       return response.created(pedido)
     } catch (error) {
+      console.log(error)
+
       // Reverte a transaction
       await trx.rollback()
-      return response.badRequest('Something in the request is wrong')
+      return response.badRequest('Something in the request is wrong: ' + error)
     }
   }
 }
