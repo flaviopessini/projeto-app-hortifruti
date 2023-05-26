@@ -2,6 +2,7 @@ import 'package:app_hortifruti/app/modules/store/controller.dart';
 import 'package:app_hortifruti/app/widgets/store_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class StorePage extends GetView<StoreController> {
@@ -10,22 +11,22 @@ class StorePage extends GetView<StoreController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Hortifruti'),
-      ),
       body: controller.obx(
-        (state) => SafeArea(
-          child: ListView(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        (state) => CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Get.theme.colorScheme.inversePrimary,
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 16.0, top: 8.0, right: 16.0, bottom: 32.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       width: 96.0,
+                      height: 96.0,
                       child: ClipRect(
                         child: FadeInImage.memoryNetwork(
                           placeholder: kTransparentImage,
@@ -53,8 +54,57 @@ class StorePage extends GetView<StoreController> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                ((context, index) {
+                  final category = state.categories[index];
+
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              color: Colors.grey[200],
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 16.0),
+                              child: Text(
+                                category.name,
+                                style: Get.textTheme.titleMedium,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      for (var product in category.products)
+                        ListTile(
+                          leading: product.image.isNotEmpty
+                              ? SizedBox(
+                                  width: 56.0,
+                                  height: 56.0,
+                                  child: ClipRRect(
+                                    child: FadeInImage.memoryNetwork(
+                                      placeholder: kTransparentImage,
+                                      image: product.image,
+                                    ),
+                                  ),
+                                )
+                              : null,
+                          title: Text(
+                            product.name,
+                          ),
+                          subtitle: Text(NumberFormat.simpleCurrency()
+                              .format(product.price)),
+                          onTap: () {},
+                        ),
+                    ],
+                  );
+                }),
+                childCount: state.categories.length,
+              ),
+            ),
+          ],
         ),
       ),
     );
