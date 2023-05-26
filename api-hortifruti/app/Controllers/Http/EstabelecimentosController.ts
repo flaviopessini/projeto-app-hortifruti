@@ -36,7 +36,9 @@ export default class EstabelecimentosController {
     const estabelecimentos = await Estabelecimento.query()
       .where('id', eId)
       .preload('categorias', (categoriaQuery) => {
-        categoriaQuery.preload('produtos')
+        categoriaQuery.preload('produtos', (produtoQuery) => {
+          produtoQuery.whereNull('deleted_at')
+        })
       })
       .preload('meiosPagamentos')
       .firstOrFail()

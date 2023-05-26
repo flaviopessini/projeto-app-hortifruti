@@ -430,6 +430,29 @@
 			]
 		},
 		{
+			"name": "estabelecimentos",
+			"item": [
+				{
+					"name": "estabelecimentos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/estabelecimentos/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"estabelecimentos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "index",
 			"request": {
 				"method": "GET",
@@ -472,7 +495,7 @@
 		},
 		{
 			"key": "token_cli",
-			"value": "MQ.XoO6l6zR0HTX6EejaYZF3vgPpgWxVfiyumdTUw0rsSMkq6VTK3YqsAwlTULK",
+			"value": "MTA.eIZ0zOBo4obZ0w-IZsFPJhvolQJEYiwmq77QyOFQY26T1Qjs0gim6PD0AvY9",
 			"type": "default"
 		}
 	]

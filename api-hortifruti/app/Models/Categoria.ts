@@ -22,7 +22,7 @@ export default class Categoria extends BaseModel {
   public estabelecimentoId: number
 
   @hasMany(() => Produto, {
-    foreignKey: 'categoria_id',
+    foreignKey: 'categoriaId',
     localKey: 'id',
   })
   public produtos: HasMany<typeof Produto>
