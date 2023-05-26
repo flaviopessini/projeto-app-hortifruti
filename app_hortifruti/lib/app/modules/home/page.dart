@@ -15,15 +15,34 @@ class HomePage extends GetView<HomeController> {
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              ListTile(
-                leading: FlutterLogo(),
-                title: Text('Horti verde'),
-                trailing: Text('Aberto'),
+          child: controller.obx(
+            (state) => ListView(
+              shrinkWrap: true,
+              children: [
+                for (var store in state!)
+                  ListTile(
+                    leading: FlutterLogo(),
+                    title: Text(store.name),
+                    trailing: Text(store.isOnline ? 'Aberto' : 'Fechado'),
+                  ),
+              ],
+            ),
+            onEmpty: Center(
+              child: Text(
+                'No momento não há estabelecimentos disponíveis para sua cidade.',
+                textAlign: TextAlign.center,
+                style: Get.textTheme.bodyMedium!,
               ),
-            ],
+            ),
+            onError: (error) => Center(
+              child: Text(
+                error!,
+                textAlign: TextAlign.center,
+                style: Get.textTheme.bodyMedium!.copyWith(
+                  color: Get.theme.colorScheme.error,
+                ),
+              ),
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:app_hortifruti/app/data/models/store.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
@@ -13,6 +14,15 @@ class Api extends GetConnect {
       return request;
     });
     super.onInit();
+  }
+
+  Future<List<StoreModel>> getStores() async {
+    final response = _errorHandler(await get('cidades/1/estabelecimentos'));
+    List<StoreModel> data = [];
+    for (var element in response.body) {
+      data.add(StoreModel.fromJson(element));
+    }
+    return data;
   }
 
   Response _errorHandler(Response response) {
