@@ -17,7 +17,7 @@ export default class extends BaseSeeder {
       await Produto.createMany([
         {
           nome: faker.commerce.productName(),
-          imagem: faker.image.urlPicsumPhotos({ width: 200 }),
+          imagem: faker.image.urlLoremFlickr({ category: 'food' }),
           ativo: true,
           categoriaId: categoria.id,
           descricao: '',

@@ -1,4 +1,5 @@
 import 'package:app_hortifruti/app/modules/store/controller.dart';
+import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:app_hortifruti/app/widgets/store_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -94,9 +95,12 @@ class StorePage extends GetView<StoreController> {
                           title: Text(
                             product.name,
                           ),
-                          subtitle: Text(NumberFormat.simpleCurrency()
-                              .format(product.price)),
-                          onTap: () {},
+                          subtitle: Text(
+                              '${NumberFormat.simpleCurrency().format(product.price)}${(product.unitOfMeasureIsByKg ? ' /kg' : '')}'),
+                          onTap: () => Get.toNamed(Routes.product, arguments: {
+                            'product': product,
+                            'store': state,
+                          }),
                         ),
                     ],
                   );
