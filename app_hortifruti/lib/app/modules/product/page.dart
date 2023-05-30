@@ -46,9 +46,9 @@ class ProductPage extends GetView<ProductController> {
               ),
               maxLength: 100,
             ),
+            const SizedBox(height: 8.0),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 border: Border.all(color: Get.theme.colorScheme.inversePrimary),
