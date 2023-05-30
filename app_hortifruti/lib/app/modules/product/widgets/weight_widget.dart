@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app_hortifruti/app/modules/product/widgets/quantity_weight_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

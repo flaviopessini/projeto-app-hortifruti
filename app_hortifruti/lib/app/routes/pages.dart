@@ -1,3 +1,5 @@
+import 'package:app_hortifruti/app/modules/cart/binding.dart';
+import 'package:app_hortifruti/app/modules/cart/page.dart';
 import 'package:app_hortifruti/app/modules/dashboard/binding.dart';
 import 'package:app_hortifruti/app/modules/dashboard/page.dart';
 import 'package:app_hortifruti/app/modules/product/binding.dart';
@@ -23,6 +25,11 @@ abstract class AppPages {
       name: Routes.product,
       page: () => const ProductPage(),
       binding: ProductBinding(),
+    ),
+    GetPage(
+      name: Routes.cart,
+      page: () => const CartPage(),
+      binding: CartBinding(),
     ),
   ];
 }
