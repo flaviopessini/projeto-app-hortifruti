@@ -20,9 +20,19 @@ class ProductController extends GetxController {
   }
 
   void addToCart() {
+    var quantity = Get.find<QuantityWeightController>().quantity;
+
+    if (_cartService.isAnNewStore(store.value!)) {
+      _cartService.clearCart();
+    }
+
+    if (_cartService.products.isEmpty) {
+      _cartService.newCart(store.value!);
+    }
+
     _cartService.addToCart(CartProductModel(
       product: product.value!,
-      quantity: Get.find<QuantityWeightController>().quantity,
+      quantity: quantity,
       observation: observationController.text,
     ));
 

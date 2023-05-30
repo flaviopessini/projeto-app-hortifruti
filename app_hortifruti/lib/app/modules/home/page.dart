@@ -22,8 +22,8 @@ class HomePage extends GetView<HomeController> {
             children: [
               for (var store in state!)
                 ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
                   leading: ClipRRect(
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,

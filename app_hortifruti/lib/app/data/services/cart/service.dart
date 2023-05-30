@@ -7,12 +7,24 @@ class CartService extends GetxService {
 
   final store = Rxn<StoreModel>();
 
+  void removeFromCart(CartProductModel cartProduct) {
+    products.remove(cartProduct);
+  }
+
   void addToCart(CartProductModel cartProduct) {
     products.add(cartProduct);
   }
 
+  bool isAnNewStore(StoreModel newStore) {
+    return store.value?.id != newStore.id;
+  }
+
   void newCart(StoreModel newStore) {
     store.value = newStore;
+    products.clear();
+  }
+
+  void clearCart() {
     products.clear();
   }
 }
