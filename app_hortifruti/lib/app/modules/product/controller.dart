@@ -19,11 +19,16 @@ class ProductController extends GetxController {
     super.onInit();
   }
 
-  void addToCart() {
+  Future<void> addToCart() async {
     var quantity = Get.find<QuantityWeightController>().quantity;
 
     if (_cartService.isAnNewStore(store.value!)) {
-      _cartService.clearCart();
+      final result = await showDialogNewCart();
+      if (result != null && result == true) {
+        _cartService.clearCart();
+      } else {
+        return;
+      }
     }
 
     if (_cartService.products.isEmpty) {
@@ -56,5 +61,25 @@ class ProductController extends GetxController {
     // );
 
     Future.delayed(const Duration(milliseconds: 300), () => Get.back());
+  }
+
+  Future<bool?> showDialogNewCart() async {
+    return await Get.dialog<bool?>(
+      barrierDismissible: false,
+      AlertDialog(
+        content: const Text(
+            'Seu carrinho será perdido se adicionar produtos de outro estabelecimento.'),
+        actions: [
+          TextButton(
+            onPressed: () => Get.back(),
+            child: const Text('Voltar'),
+          ),
+          TextButton(
+            onPressed: () => Get.back(result: true),
+            child: const Text('Confirmar'),
+          ),
+        ],
+      ),
+    );
   }
 }
