@@ -6,6 +6,10 @@ class CartService extends GetxService {
   List<CartProductModel> products = RxList<CartProductModel>.empty();
 
   final store = Rxn<StoreModel>();
+  final observation = RxString('');
+
+  num get total => products.fold(
+      0, (previousValue, element) => previousValue + element.total);
 
   void removeFromCart(CartProductModel cartProduct) {
     products.remove(cartProduct);

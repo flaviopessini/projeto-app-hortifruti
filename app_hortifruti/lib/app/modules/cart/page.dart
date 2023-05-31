@@ -1,5 +1,6 @@
 import 'package:app_hortifruti/app/data/models/cart_product.dart';
 import 'package:app_hortifruti/app/modules/cart/controller.dart';
+import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -90,7 +91,7 @@ class CartPage extends GetView<CartController> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () => Get.toNamed(Routes.checkout),
                         icon: const Icon(Icons.shopping_cart_checkout_rounded),
                         label: const Text('Avançar'),
                       ),
