@@ -122,11 +122,15 @@ class CheckoutPage extends GetView<CheckoutController> {
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.check_rounded),
-                  label: const Text('Finalizar pedido'),
+                OutlinedButton(
+                  onPressed: controller.goToLogin,
+                  child: const Text('Entre para continuar'),
                 ),
+                // ElevatedButton.icon(
+                //   onPressed: () {},
+                //   icon: const Icon(Icons.check_rounded),
+                //   label: const Text('Finalizar pedido'),
+                // ),
               ],
             ),
           ),
