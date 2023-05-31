@@ -1,4 +1,6 @@
 import 'package:app_hortifruti/app/data/models/category.dart';
+import 'package:app_hortifruti/app/data/models/payment_method.dart';
+import 'package:app_hortifruti/app/data/models/shipping_by_city.dart';
 
 class StoreModel {
   int id;
@@ -6,6 +8,8 @@ class StoreModel {
   String image;
   bool isOnline;
   List<CategoryModel> categories;
+  List<ShippingByCityModel> shippingByCity;
+  List<PaymentMethodModel> paymentMethods;
 
   StoreModel({
     required this.id,
@@ -13,6 +17,8 @@ class StoreModel {
     required this.image,
     required this.isOnline,
     required this.categories,
+    required this.shippingByCity,
+    required this.paymentMethods,
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) => StoreModel(
@@ -24,5 +30,13 @@ class StoreModel {
             ? []
             : List<CategoryModel>.from(
                 json['categorias'].map((p) => CategoryModel.fromJson(p))),
+        shippingByCity: json['categorias'] == null
+            ? []
+            : List<ShippingByCityModel>.from(
+                json['cidades'].map((c) => ShippingByCityModel.fromJson(c))),
+        paymentMethods: json['meiosPagamentos'] == null
+            ? []
+            : List<PaymentMethodModel>.from(json['meiosPagamentos']
+                .map((p) => PaymentMethodModel.fromJson(p))),
       );
 }

@@ -16,72 +16,119 @@ class CheckoutPage extends GetView<CheckoutController> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Produtos',
-                        style: Get.textTheme.titleMedium,
-                      ),
+          child: Obx(
+            () => Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Get.theme.colorScheme.inversePrimary,
                     ),
-                    Text(
-                      NumberFormat.simpleCurrency()
-                          .format(controller.totalCart),
-                      style: Get.textTheme.titleMedium,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Entrega',
-                        style: Get.textTheme.titleMedium,
-                      ),
-                    ),
-                    Text(
-                      NumberFormat.simpleCurrency()
-                          .format(controller.deliveyCost),
-                      style: Get.textTheme.titleMedium,
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Total',
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Resumo',
                         style: Get.textTheme.titleLarge,
                       ),
-                    ),
-                    Text(
-                      NumberFormat.simpleCurrency()
-                          .format(controller.totalOrder),
-                      style: Get.textTheme.titleLarge,
-                    ),
-                  ],
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Produtos',
+                              style: Get.textTheme.titleMedium,
+                            ),
+                          ),
+                          Text(
+                            NumberFormat.simpleCurrency()
+                                .format(controller.totalCart),
+                            style: Get.textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Entrega',
+                              style: Get.textTheme.titleMedium,
+                            ),
+                          ),
+                          Text(
+                            NumberFormat.simpleCurrency()
+                                .format(controller.deliveyCost),
+                            style: Get.textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                      const Divider(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Total',
+                              style: Get.textTheme.titleLarge!.copyWith(
+                                color: Get.theme.colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            NumberFormat.simpleCurrency()
+                                .format(controller.totalOrder),
+                            style: Get.textTheme.titleLarge!.copyWith(
+                              color: Get.theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // const SizedBox(height: 8.0),
+                      // ElevatedButton.icon(
+                      //   onPressed: () {},
+                      //   icon: const Icon(Icons.check_rounded),
+                      //   label: const Text('Finalizar pedido'),
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton.icon(
+                const SizedBox(height: 16.0),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Get.theme.colorScheme.inversePrimary,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Formas de pagamento',
+                        style: Get.textTheme.titleLarge,
+                      ),
+                      for (final item in controller.paymentMethods)
+                        RadioListTile(
+                          title: Text(item.name),
+                          value: item,
+                          dense: true,
+                          groupValue: controller.paymentMethod.value,
+                          onChanged: controller.changePaymentMethod,
+                        ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                ElevatedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.check_rounded),
                   label: const Text('Finalizar pedido'),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
