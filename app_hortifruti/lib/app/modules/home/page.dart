@@ -50,7 +50,7 @@ class HomePage extends GetView<HomeController> {
           ),
           onError: (error) => Center(
             child: Text(
-              error!,
+              error ?? 'Erro',
               textAlign: TextAlign.center,
               style: Get.textTheme.bodyMedium!.copyWith(
                 color: Get.theme.colorScheme.error,

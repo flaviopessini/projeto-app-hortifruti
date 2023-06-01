@@ -39,6 +39,8 @@ class LoginPage extends GetView<LoginController> {
                       }
                     },
                     maxLines: 1,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 16.0),
                   TextFormField(
@@ -48,10 +50,11 @@ class LoginPage extends GetView<LoginController> {
                     controller: controller.passwordController,
                     obscureText: true,
                     maxLines: 1,
+                    textInputAction: TextInputAction.done,
                   ),
                   const SizedBox(height: 32.0),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: controller.login,
                     child: const Text('Entrar'),
                   ),
                   const Center(

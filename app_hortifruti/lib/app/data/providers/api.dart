@@ -1,10 +1,18 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:app_hortifruti/app/data/models/store.dart';
+import 'package:app_hortifruti/app/data/models/user.dart';
+import 'package:app_hortifruti/app/data/models/user_login_request.dart';
+import 'package:app_hortifruti/app/data/models/user_login_response.dart';
+import 'package:app_hortifruti/app/data/services/storage/service.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
 class Api extends GetConnect {
+  final _storageService = Get.find<StorageService>();
+
   @override
   void onInit() {
     //httpClient.baseUrl = 'http://192.168.0.218:3333/';
@@ -14,7 +22,22 @@ class Api extends GetConnect {
       request.headers['Content-Type'] = 'application/json';
       return request;
     });
+
+    httpClient.addAuthenticator((Request request) {
+      var token = _storageService.token;
+      var headers = {
+        'Authorization': 'Bearer $token',
+      };
+      request.headers.addAll(headers);
+      return request;
+    });
+
     super.onInit();
+  }
+
+  Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
+    final response = _errorHandler(await post('login', jsonEncode(data)));
+    return UserLoginResponseModel.fromJson(response.body);
   }
 
   Future<List<StoreModel>> getStores() async {
@@ -32,8 +55,18 @@ class Api extends GetConnect {
     return data;
   }
 
+  Future<UserModel> getUser() async {
+    final response = _errorHandler(await get('auth/me'));
+    return UserModel.fromJson(response.body);
+  }
+
   Response _errorHandler(Response response) {
     log(response.bodyString.toString());
+
+    if (response.status.connectionError) {
+      log('Erro de conexão com o serviço!');
+      throw 'Erro de conexão com o serviço!';
+    }
 
     switch (response.statusCode) {
       case 200:
