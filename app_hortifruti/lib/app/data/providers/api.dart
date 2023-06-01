@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:app_hortifruti/app/data/models/address.dart';
 import 'package:app_hortifruti/app/data/models/store.dart';
 import 'package:app_hortifruti/app/data/models/user.dart';
 import 'package:app_hortifruti/app/data/models/user_login_request.dart';
 import 'package:app_hortifruti/app/data/models/user_login_response.dart';
 import 'package:app_hortifruti/app/data/services/storage/service.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
 class Api extends GetConnect {
@@ -38,6 +38,15 @@ class Api extends GetConnect {
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
     final response = _errorHandler(await post('login', jsonEncode(data)));
     return UserLoginResponseModel.fromJson(response.body);
+  }
+
+  Future<List<AddressModel>> getUserAddress() async {
+    final response = _errorHandler(await get('enderecos'));
+    List<AddressModel> data = [];
+    for (var element in response.body) {
+      data.add(AddressModel.fromJson(element));
+    }
+    return data;
   }
 
   Future<List<StoreModel>> getStores() async {

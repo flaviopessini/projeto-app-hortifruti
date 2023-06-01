@@ -107,6 +107,32 @@ class CheckoutPage extends GetView<CheckoutController> {
                   child: Column(
                     children: [
                       Text(
+                        'Endereço',
+                        style: Get.textTheme.titleLarge,
+                      ),
+                      if (controller.addresses.isEmpty)
+                        OutlinedButton(
+                          onPressed: () {},
+                          child: const Text('Cadastrar um endereço'),
+                        )
+                      else
+                        Row(),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Get.theme.colorScheme.inversePrimary,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text(
                         'Formas de pagamento',
                         style: Get.textTheme.titleLarge,
                       ),
