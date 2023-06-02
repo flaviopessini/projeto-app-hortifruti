@@ -9,6 +9,7 @@ import 'package:app_hortifruti/app/data/models/user_address_request.dart';
 import 'package:app_hortifruti/app/data/models/user_login_request.dart';
 import 'package:app_hortifruti/app/data/models/user_login_response.dart';
 import 'package:app_hortifruti/app/data/services/storage/service.dart';
+import 'package:app_hortifruti/config/config.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 
@@ -17,8 +18,7 @@ class Api extends GetConnect {
 
   @override
   void onInit() {
-    //httpClient.baseUrl = 'http://192.168.0.218:3333/';
-    httpClient.baseUrl = 'http://192.168.1.54:3333/';
+    httpClient.baseUrl = Config.ipAddress;
     httpClient.addRequestModifier((Request request) {
       request.headers['Accept'] = 'application/json';
       request.headers['Content-Type'] = 'application/json';
