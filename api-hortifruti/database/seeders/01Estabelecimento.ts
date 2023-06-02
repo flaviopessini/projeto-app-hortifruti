@@ -5,7 +5,6 @@ import CidadesEstabelecimento from 'App/Models/CidadesEstabelecimento'
 import Estabelecimento from 'App/Models/Estabelecimento'
 import Estado from 'App/Models/Estado'
 import User from 'App/Models/User'
-import Cliente from 'App/Models/Cliente'
 
 export default class extends BaseSeeder {
   public async run() {
