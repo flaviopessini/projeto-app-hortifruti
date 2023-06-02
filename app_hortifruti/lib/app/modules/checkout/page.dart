@@ -112,11 +112,15 @@ class CheckoutPage extends GetView<CheckoutController> {
                       ),
                       if (controller.addresses.isEmpty)
                         OutlinedButton(
-                          onPressed: () {},
+                          onPressed: controller.goToNewAddress,
                           child: const Text('Cadastrar um endereço'),
                         )
                       else
-                        Row(),
+                        Row(
+                          children: [
+                            //
+                          ],
+                        ),
                     ],
                   ),
                 ),

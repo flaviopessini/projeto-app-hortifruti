@@ -60,4 +60,8 @@ class CheckoutController extends GetxController {
       addresses.addAll(value);
     });
   }
+
+  void goToNewAddress() {
+    Get.toNamed(Routes.userAddress);
+  }
 }
