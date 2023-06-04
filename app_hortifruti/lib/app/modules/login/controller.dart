@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final _authService = Get.find<AuthService>();
 
+  final backToPrevious = Get.arguments["backToPrevious"];
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
@@ -15,6 +17,10 @@ class LoginController extends GetxController {
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
     );
-    _authService.login(userLogin).then((value) => null);
+    _authService.login(userLogin).then((value) {
+      if (backToPrevious != null && backToPrevious == true) {
+        Get.back();
+      }
+    });
   }
 }

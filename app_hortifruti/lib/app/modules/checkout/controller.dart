@@ -52,7 +52,7 @@ class CheckoutController extends GetxController {
   }
 
   void goToLogin() {
-    Get.toNamed(Routes.login);
+    Get.toNamed(Routes.login, arguments: {"backToPrevious": true});
   }
 
   void fetchAddresses() {
