@@ -12,6 +12,7 @@ class UserAddressController extends GetxController
 
   final cityId = RxnInt();
 
+  final formKey = GlobalKey<FormState>();
   final streetController = TextEditingController();
   final numberController = TextEditingController();
   final neighborhoodController = TextEditingController();
@@ -36,6 +37,12 @@ class UserAddressController extends GetxController
   }
 
   void submit() {
+    Get.focusScope!.unfocus();
+
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
+
     final address = UserAddressRequestModel(
       street: streetController.text.trim(),
       number: numberController.text.trim(),

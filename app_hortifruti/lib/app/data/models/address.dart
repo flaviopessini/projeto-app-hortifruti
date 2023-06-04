@@ -24,7 +24,7 @@ class AddressModel {
         street: json['rua'],
         number: json['numero'],
         neighborhood: json['bairro'],
-        referencePoint: json['ponto_referencia'],
+        referencePoint: json['ponto_referencia'] ?? '',
         complement: json['complemento'],
         city:
             json['cidade'] != null ? CityModel.fromJson(json['cidade']) : null,

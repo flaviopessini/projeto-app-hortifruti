@@ -17,103 +17,111 @@ class UserAddressPage extends GetView<UserAddressController> {
           (state) => SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: controller.streetController,
-                    decoration: const InputDecoration(
-                      labelText: 'Rua',
+              child: Form(
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: controller.streetController,
+                      decoration: const InputDecoration(
+                        labelText: 'Rua',
+                      ),
+                      maxLines: 1,
+                      textInputAction: TextInputAction.next,
+                      textCapitalization: TextCapitalization.sentences,
+                      validator: (value) {
+                        if (value != null && value.isEmpty) {
+                          return 'Informe a rua';
+                        }
+                        return null;
+                      },
                     ),
-                    maxLines: 1,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Informe a rua';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: controller.numberController,
-                    decoration: const InputDecoration(
-                      labelText: 'Número',
+                    TextFormField(
+                      controller: controller.numberController,
+                      decoration: const InputDecoration(
+                        labelText: 'Número',
+                      ),
+                      maxLines: 1,
+                      textInputAction: TextInputAction.next,
+                      textCapitalization: TextCapitalization.sentences,
+                      validator: (value) {
+                        if (value != null && value.isEmpty) {
+                          return 'Informe o número';
+                        }
+                        return null;
+                      },
                     ),
-                    maxLines: 1,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Informe o número';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: controller.neighborhoodController,
-                    decoration: const InputDecoration(
-                      labelText: 'Bairro',
+                    TextFormField(
+                      controller: controller.neighborhoodController,
+                      decoration: const InputDecoration(
+                        labelText: 'Bairro',
+                      ),
+                      maxLines: 1,
+                      textInputAction: TextInputAction.next,
+                      textCapitalization: TextCapitalization.sentences,
+                      validator: (value) {
+                        if (value != null && value.isEmpty) {
+                          return 'Informe o bairro';
+                        }
+                        return null;
+                      },
                     ),
-                    maxLines: 1,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return 'Informe o bairro';
-                      }
-                      return null;
-                    },
-                  ),
-                  DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Cidade',
+                    DropdownButtonFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Cidade',
+                      ),
+                      value: controller.cityId.value,
+                      items: state!
+                          .map(
+                            (e) => DropdownMenuItem<int>(
+                              value: e.id,
+                              child: Text(e.name),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: controller.changeCity,
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Selecione uma cidade';
+                        }
+                        return null;
+                      },
                     ),
-                    value: controller.cityId.value,
-                    items: state!
-                        .map(
-                          (e) => DropdownMenuItem<int>(
-                            value: e.id,
-                            child: Text(e.name),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: controller.changeCity,
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Selecione uma cidade';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: controller.cepController,
-                    decoration: const InputDecoration(
-                      labelText: 'Cep',
+                    TextFormField(
+                      controller: controller.cepController,
+                      decoration: const InputDecoration(
+                        labelText: 'Cep',
+                      ),
+                      maxLines: 1,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
                     ),
-                    maxLines: 1,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                  ),
-                  TextFormField(
-                    controller: controller.referencePointController,
-                    decoration: const InputDecoration(
-                      labelText: 'Ponto de referência',
+                    TextFormField(
+                      controller: controller.referencePointController,
+                      decoration: const InputDecoration(
+                        labelText: 'Ponto de referência',
+                      ),
+                      maxLines: 2,
+                      textCapitalization: TextCapitalization.sentences,
+                      textInputAction: TextInputAction.next,
                     ),
-                    maxLines: 2,
-                    textInputAction: TextInputAction.next,
-                  ),
-                  TextFormField(
-                    controller: controller.complementController,
-                    decoration: const InputDecoration(
-                      labelText: 'Complemento',
+                    TextFormField(
+                      controller: controller.complementController,
+                      decoration: const InputDecoration(
+                        labelText: 'Complemento',
+                      ),
+                      maxLines: 2,
+                      textCapitalization: TextCapitalization.sentences,
+                      textInputAction: TextInputAction.done,
                     ),
-                    maxLines: 2,
-                    textInputAction: TextInputAction.done,
-                  ),
-                  const SizedBox(height: 32.0),
-                  ElevatedButton.icon(
-                    onPressed: controller.submit,
-                    icon: const Icon(Icons.check_rounded),
-                    label: const Text('Salvar'),
-                  ),
-                ],
+                    const SizedBox(height: 32.0),
+                    ElevatedButton.icon(
+                      onPressed: controller.submit,
+                      icon: const Icon(Icons.check_rounded),
+                      label: const Text('Salvar'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class AuthService extends GetxService {
   final _storageService = Get.find<StorageService>();
   final user = Rxn<UserModel>();
-  AuthRepository _repository;
+  final AuthRepository _repository;
 
   bool get isLogged => user.value != null;
 

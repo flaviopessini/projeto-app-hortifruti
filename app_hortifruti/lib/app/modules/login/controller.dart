@@ -8,11 +8,15 @@ class LoginController extends GetxController {
 
   final backToPrevious = Get.arguments["backToPrevious"];
 
+  final formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
   void login() {
-    Get.focusScope?.unfocus();
+    Get.focusScope!.unfocus();
+    if (formKey.currentState!.validate()) {
+      return;
+    }
     final userLogin = UserLoginRequestModel(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
