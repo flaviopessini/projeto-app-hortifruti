@@ -3,7 +3,7 @@ import 'package:app_hortifruti/app/modules/user_address/controller.dart';
 import 'package:app_hortifruti/app/modules/user_address/repository.dart';
 import 'package:get/get.dart';
 
-class UserAddressControllerBinding implements Bindings {
+class UserAddressBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UserAddressController>(

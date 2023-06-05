@@ -65,13 +65,17 @@ class CheckoutController extends GetxController {
     paymentMethod.value = newPaymentMethod;
   }
 
-  void goToLogin() {
-    Get.toNamed(Routes.login, arguments: {"backToPrevious": true});
+  void goToLogin() async {
+    final result = await Get.toNamed(Routes.login);
+    if (result is bool && result == true) {
+      fetchAddresses();
+    }
   }
 
   void fetchAddresses() {
+    isLoading.value = true;
     _repository.getUserAddresses().then((value) {
-      addresses.addAll(value);
+      addresses.assignAll(value);
       if (addresses.isNotEmpty) {
         selectedAddress.value = addresses.first;
       }
@@ -80,8 +84,17 @@ class CheckoutController extends GetxController {
     }).whenComplete(() => isLoading.value = false);
   }
 
-  void goToNewAddress() {
-    Get.toNamed(Routes.userAddress);
+  void goToNewAddress() async {
+    final result = await Get.toNamed(Routes.userAddress);
+    if (result is bool && result) {
+      fetchAddresses();
+      Future.delayed(const Duration(milliseconds: 500)).then((_) {
+        if (Get.isDialogOpen != null && Get.isDialogOpen!) {
+          Get.until((route) => !Get.isDialogOpen!);
+          showAddressList();
+        }
+      });
+    }
   }
 
   void showAddressList() {

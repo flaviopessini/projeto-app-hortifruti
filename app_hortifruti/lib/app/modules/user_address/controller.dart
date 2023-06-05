@@ -1,6 +1,5 @@
 import 'package:app_hortifruti/app/data/models/city.dart';
 import 'package:app_hortifruti/app/data/models/user_address_request.dart';
-import 'package:app_hortifruti/app/data/services/auth/service.dart';
 import 'package:app_hortifruti/app/modules/user_address/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 class UserAddressController extends GetxController
     with StateMixin<List<CityModel>> {
   final UserAddressRepository _repository;
-  final _authService = Get.find<AuthService>();
 
   final cityId = RxnInt();
 
@@ -57,6 +55,8 @@ class UserAddressController extends GetxController
       (value) {
         ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
             const SnackBar(content: Text('Novo endereço cadastrado')));
+
+        Get.back(result: true);
       },
       onError: (error) => Get.dialog(
         AlertDialog(

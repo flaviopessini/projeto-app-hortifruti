@@ -50,7 +50,7 @@ abstract class AppPages {
     GetPage(
       name: Routes.userAddress,
       page: () => const UserAddressPage(),
-      binding: UserAddressControllerBinding(),
+      binding: UserAddressBinding(),
     ),
   ];
 }

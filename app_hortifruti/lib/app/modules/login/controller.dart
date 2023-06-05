@@ -22,9 +22,14 @@ class LoginController extends GetxController {
       password: passwordController.text.trim(),
     );
     _authService.login(userLogin).then((value) {
-      if (backToPrevious != null && backToPrevious == true) {
-        Get.back();
-      }
+      Get.back(result: true);
+    }, onError: (error) {
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Ocorreu um erro'),
+          content: Text(error.toString()),
+        ),
+      );
     });
   }
 }
