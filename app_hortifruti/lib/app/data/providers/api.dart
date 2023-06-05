@@ -84,6 +84,10 @@ class Api extends GetConnect {
     _errorHandler(await post('enderecos', jsonEncode(data)));
   }
 
+  Future<void> postOrder(data) async {
+    _errorHandler(await post('pedidos', jsonEncode(data)));
+  }
+
   Response _errorHandler(Response response) {
     log(response.bodyString.toString());
 

@@ -195,7 +195,9 @@ class CheckoutPage extends GetView<CheckoutController> {
                         )
                       else
                         ElevatedButton.icon(
-                          onPressed: controller.isAllRight ? () => {} : null,
+                          onPressed: controller.isAllRight
+                              ? controller.sendOrder
+                              : null,
                           icon: const Icon(Icons.check_rounded),
                           label: const Text('Finalizar pedido'),
                         ),

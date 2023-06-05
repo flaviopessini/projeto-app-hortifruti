@@ -14,7 +14,7 @@ class LoginController extends GetxController {
 
   void login() {
     Get.focusScope!.unfocus();
-    if (formKey.currentState!.validate()) {
+    if (!formKey.currentState!.validate()) {
       return;
     }
     final userLogin = UserLoginRequestModel(

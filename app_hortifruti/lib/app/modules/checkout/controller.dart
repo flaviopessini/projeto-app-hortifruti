@@ -1,4 +1,5 @@
 import 'package:app_hortifruti/app/data/models/address.dart';
+import 'package:app_hortifruti/app/data/models/order_request.dart';
 import 'package:app_hortifruti/app/data/models/payment_method.dart';
 import 'package:app_hortifruti/app/data/models/shipping_by_city.dart';
 import 'package:app_hortifruti/app/data/services/auth/service.dart';
@@ -47,7 +48,8 @@ class CheckoutController extends GetxController {
   final selectedAddress = Rxn<AddressModel>();
 
   bool get isAllRight {
-    return getShippingByCity != null &&
+    return isLogged &&
+        getShippingByCity != null &&
         selectedAddress.value != null &&
         paymentMethod.value != null;
   }
@@ -107,5 +109,50 @@ class CheckoutController extends GetxController {
         ],
       ),
     );
+  }
+
+  void sendOrder() {
+    // if (paymentMethod.value == null) {
+    //   ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
+    //     SnackBar(
+    //       content: const Text('Selecione a forma de pagamento'),
+    //       action: SnackBarAction(
+    //         label: 'Fechar',
+    //         onPressed: () => Get.back(),
+    //       ),
+    //     ),
+    //   );
+
+    //   return;
+    // }
+
+    final trocoPara = paymentMethod.value!.name != 'Dinheiro' ? 0 : 0;
+
+    final order = OrderRequestModel(
+      store: _cartService.store.value!,
+      paymentMethod: paymentMethod.value!,
+      cartProducts: _cartService.products,
+      address: selectedAddress.value!,
+      observation: _cartService.observation.value,
+      trocoPara: trocoPara,
+    );
+
+    _repository.postOrder(order).then((value) async {
+      await Get.dialog(
+        AlertDialog(
+          title: const Text('Pedido enviado'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _cartService.finalizedCart();
+                Get.offAllNamed(Routes.dashboard);
+              },
+              child: const Text('Meus pedidos'),
+            ),
+          ],
+        ),
+        barrierDismissible: false,
+      );
+    });
   }
 }
