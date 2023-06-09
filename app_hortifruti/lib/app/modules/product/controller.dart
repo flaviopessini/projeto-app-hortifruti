@@ -23,11 +23,13 @@ class ProductController extends GetxController {
     var quantity = Get.find<QuantityWeightController>().quantity;
 
     if (_cartService.isAnNewStore(store.value!)) {
-      final result = await showDialogNewCart();
-      if (result != null && result == true) {
-        _cartService.clearCart();
-      } else {
-        return;
+      if (_cartService.products.isNotEmpty) {
+        final result = await showDialogNewCart();
+        if (result != null && result == true) {
+          _cartService.clearCart();
+        } else {
+          return;
+        }
       }
     }
 

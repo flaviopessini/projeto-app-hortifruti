@@ -116,7 +116,9 @@ class CheckoutPage extends GetView<CheckoutController> {
                             ),
                             if (controller.addresses.isEmpty)
                               OutlinedButton(
-                                onPressed: controller.goToNewAddress,
+                                onPressed: controller.isLogged
+                                    ? controller.goToNewAddress
+                                    : null,
                                 child: const Text('Cadastrar um endereço'),
                               )
                             else ...[

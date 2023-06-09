@@ -12,6 +12,7 @@ class StorageService extends GetxService {
   @override
   void onInit() {
     _token.value = box.read(StorageKey.token.name);
+    box.listenKey(StorageKey.token.name, (value) => _token.value = value);
     super.onInit();
   }
 
@@ -20,7 +21,7 @@ class StorageService extends GetxService {
     return box.write(StorageKey.token.name, token);
   }
 
-  Future<void> detroyToken() async {
+  Future<void> destroyToken() async {
     _token.value = null;
     await box.remove(StorageKey.token.name);
   }

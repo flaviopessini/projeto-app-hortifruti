@@ -125,20 +125,6 @@ class CheckoutController extends GetxController {
   }
 
   void sendOrder() {
-    // if (paymentMethod.value == null) {
-    //   ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
-    //     SnackBar(
-    //       content: const Text('Selecione a forma de pagamento'),
-    //       action: SnackBarAction(
-    //         label: 'Fechar',
-    //         onPressed: () => Get.back(),
-    //       ),
-    //     ),
-    //   );
-
-    //   return;
-    // }
-
     final trocoPara = paymentMethod.value!.name != 'Dinheiro' ? 0 : 0;
 
     final order = OrderRequestModel(
@@ -150,15 +136,15 @@ class CheckoutController extends GetxController {
       trocoPara: trocoPara,
     );
 
-    _repository.postOrder(order).then((value) async {
-      await Get.dialog(
+    _repository.postOrder(order).then((value) {
+      Get.dialog(
         AlertDialog(
           title: const Text('Pedido enviado'),
           actions: [
             TextButton(
               onPressed: () {
                 _cartService.finalizedCart();
-                Get.offAllNamed(Routes.dashboard);
+                Get.offAllNamed(Routes.dashboard, arguments: 2);
               },
               child: const Text('Meus pedidos'),
             ),

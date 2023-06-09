@@ -1,12 +1,11 @@
 import 'package:app_hortifruti/app/data/models/user_login_request.dart';
 import 'package:app_hortifruti/app/data/services/auth/service.dart';
+import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final _authService = Get.find<AuthService>();
-
-  final backToPrevious = Get.arguments["backToPrevious"];
 
   final formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
@@ -22,7 +21,11 @@ class LoginController extends GetxController {
       password: passwordController.text.trim(),
     );
     _authService.login(userLogin).then((value) {
-      Get.back(result: true);
+      if (Get.routing.previous == Routes.checkout) {
+        Get.back(result: true);
+      } else {
+        Get.offAllNamed(Routes.dashboard, arguments: 1);
+      }
     }, onError: (error) {
       Get.dialog(
         AlertDialog(
