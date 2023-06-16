@@ -10,7 +10,7 @@ class UserAddressPage extends GetView<UserAddressController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Get.theme.colorScheme.inversePrimary,
-        title: const Text('Endereço'),
+        title: Text(controller.isEditing.isTrue ? 'Endereço' : 'Novo endereço'),
       ),
       body: SafeArea(
         child: controller.obx(

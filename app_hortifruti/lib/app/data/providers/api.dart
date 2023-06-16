@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:app_hortifruti/app/data/models/address.dart';
 import 'package:app_hortifruti/app/data/models/city.dart';
+import 'package:app_hortifruti/app/data/models/order.dart';
 import 'package:app_hortifruti/app/data/models/store.dart';
 import 'package:app_hortifruti/app/data/models/user.dart';
 import 'package:app_hortifruti/app/data/models/user_address_request.dart';
@@ -90,8 +91,30 @@ class Api extends GetConnect {
     _errorHandler(await post('enderecos', jsonEncode(data)));
   }
 
+  Future<void> putAddress(UserAddressRequestModel data) async {
+    _errorHandler(await put('enderecos/${data.id}', jsonEncode(data)));
+  }
+
+  Future<void> deleteAddress(int id) async {
+    _errorHandler(await delete('enderecos/$id'));
+  }
+
   Future<void> postOrder(data) async {
     _errorHandler(await post('pedidos', jsonEncode(data)));
+  }
+
+  Future<List<OrderModel>> getOrders() async {
+    final response = _errorHandler(await get('pedidos'));
+    List<OrderModel> data = [];
+    for (var o in response.body) {
+      data.add(OrderModel.fromJson(o));
+    }
+    return data;
+  }
+
+  Future<OrderModel> getOrder(String hashId) async {
+    final response = _errorHandler(await get('pedidos/$hashId'));
+    return OrderModel.fromJson(response.body);
   }
 
   Response _errorHandler(Response response) {

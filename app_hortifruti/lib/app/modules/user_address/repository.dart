@@ -11,4 +11,7 @@ class UserAddressRepository {
 
   Future<void> postAddress(UserAddressRequestModel addressRequest) =>
       _api.postAddress(addressRequest);
+
+  Future<void> putAddress(UserAddressRequestModel addressRequest) =>
+      _api.putAddress(addressRequest);
 }

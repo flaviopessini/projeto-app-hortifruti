@@ -6,12 +6,17 @@ import 'package:app_hortifruti/app/modules/dashboard/binding.dart';
 import 'package:app_hortifruti/app/modules/dashboard/page.dart';
 import 'package:app_hortifruti/app/modules/login/binding.dart';
 import 'package:app_hortifruti/app/modules/login/page.dart';
+import 'package:app_hortifruti/app/modules/order/binding.dart';
+import 'package:app_hortifruti/app/modules/order/page.dart';
 import 'package:app_hortifruti/app/modules/product/binding.dart';
 import 'package:app_hortifruti/app/modules/product/page.dart';
 import 'package:app_hortifruti/app/modules/store/binding.dart';
 import 'package:app_hortifruti/app/modules/store/page.dart';
 import 'package:app_hortifruti/app/modules/user_address/binding.dart';
 import 'package:app_hortifruti/app/modules/user_address/page.dart';
+import 'package:app_hortifruti/app/modules/user_address_list/binding.dart';
+import 'package:app_hortifruti/app/modules/user_address_list/controller.dart';
+import 'package:app_hortifruti/app/modules/user_address_list/page.dart';
 import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -51,6 +56,16 @@ abstract class AppPages {
       name: Routes.userAddress,
       page: () => const UserAddressPage(),
       binding: UserAddressBinding(),
+    ),
+    GetPage(
+      name: Routes.userAddressList,
+      page: () => const UserAddressListPage(),
+      binding: UserAddressListBinding(),
+    ),
+    GetPage(
+      name: Routes.order,
+      page: () => const OrderPage(),
+      binding: OrderBinding(),
     ),
   ];
 }

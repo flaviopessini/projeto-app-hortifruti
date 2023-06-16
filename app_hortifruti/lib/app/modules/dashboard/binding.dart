@@ -2,6 +2,8 @@ import 'package:app_hortifruti/app/data/providers/api.dart';
 import 'package:app_hortifruti/app/modules/dashboard/controller.dart';
 import 'package:app_hortifruti/app/modules/home/controller.dart';
 import 'package:app_hortifruti/app/modules/home/repository.dart';
+import 'package:app_hortifruti/app/modules/order_list/controller.dart';
+import 'package:app_hortifruti/app/modules/order_list/repository.dart';
 import 'package:app_hortifruti/app/modules/user_profile/controller.dart';
 import 'package:app_hortifruti/app/modules/user_profile/repository.dart';
 import 'package:get/get.dart';
@@ -20,6 +22,11 @@ class DashboardBinding implements Bindings {
     Get.lazyPut<UserProfileController>(
       () => UserProfileController(
         UserProfileRepository(Get.find<Api>()),
+      ),
+    );
+    Get.lazyPut<OrderListControlle>(
+      () => OrderListControlle(
+        OrderListRepository(Get.find<Api>()),
       ),
     );
   }
