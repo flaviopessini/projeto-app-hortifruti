@@ -138,6 +138,8 @@ class Api extends GetConnect {
       case 202:
       case 204:
         return response;
+      case 422:
+        throw response.body['errors'].first['message'];
       default:
         throw 'Ocorreu um erro inesperado';
     }

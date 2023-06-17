@@ -24,8 +24,8 @@ class DashboardBinding implements Bindings {
         UserProfileRepository(Get.find<Api>()),
       ),
     );
-    Get.lazyPut<OrderListControlle>(
-      () => OrderListControlle(
+    Get.lazyPut<OrderListController>(
+      () => OrderListController(
         OrderListRepository(Get.find<Api>()),
       ),
     );

@@ -79,11 +79,14 @@ class RegisterController extends GetxController {
           },
         );
       },
-      onError: (error) => Get.dialog(
-        AlertDialog(
-          title: Text(error.toString()),
-        ),
-      ),
+      onError: (error) {
+        Get.dialog(
+          AlertDialog(
+            title: const Text('Oops...'),
+            content: Text(error.toString()),
+          ),
+        );
+      },
     );
   }
 }

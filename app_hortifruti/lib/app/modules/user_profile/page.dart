@@ -13,15 +13,31 @@ class UserProfilePage extends GetView<UserProfileController> {
         backgroundColor: Get.theme.colorScheme.inversePrimary,
         title: const Text('Meu perfil'),
         actions: [
-          IconButton.outlined(
-            onPressed: controller.logout,
-            icon: const Icon(Icons.logout_rounded),
+          Obx(
+            () => IconButton.outlined(
+              onPressed: controller.isLogged ? controller.logout : null,
+              icon: const Icon(Icons.logout_rounded),
+            ),
           ),
         ],
       ),
       body: SafeArea(
-        child: controller.obx(
-          (state) => SingleChildScrollView(
+        child: Obx(() {
+          if (controller.isLoading.isTrue) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (!controller.isLogged) {
+            return Center(
+              child: ElevatedButton.icon(
+                onPressed: () => Get.toNamed(Routes.login),
+                label: const Text('Entrar com a minha conta'),
+                icon: const Icon(Icons.login_rounded),
+              ),
+            );
+          }
+          return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -111,15 +127,8 @@ class UserProfilePage extends GetView<UserProfileController> {
                 ],
               ),
             ),
-          ),
-          onError: (error) => Center(
-            child: ElevatedButton.icon(
-              onPressed: () => Get.offAllNamed(Routes.login),
-              label: const Text('Entrar com a minha conta'),
-              icon: const Icon(Icons.login_rounded),
-            ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

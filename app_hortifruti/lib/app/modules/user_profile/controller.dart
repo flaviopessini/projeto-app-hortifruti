@@ -1,4 +1,3 @@
-import 'package:app_hortifruti/app/data/models/user.dart';
 import 'package:app_hortifruti/app/data/models/user_profile_request.dart';
 import 'package:app_hortifruti/app/data/services/auth/service.dart';
 import 'package:app_hortifruti/app/modules/user_profile/repository.dart';
@@ -7,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class UserProfileController extends GetxController with StateMixin<UserModel> {
+class UserProfileController extends GetxController {
+  final isLoading = RxBool(false);
   final UserProfileRepository _repository;
   final _authService = Get.find<AuthService>();
 
@@ -27,18 +27,29 @@ class UserProfileController extends GetxController with StateMixin<UserModel> {
 
   UserProfileController(this._repository);
 
+  bool get isLogged => _authService.isLogged;
+
   @override
   void onInit() {
+    ever(_authService.user, (_) => fetchUser());
+
+    super.onInit();
+  }
+
+  void fetchUser() {
+    isLoading.value = true;
     _repository.getUser().then((data) {
       nameController.text = data.name;
       emailController.text = data.email;
       phoneController.text = data.phone;
-
-      change(data, status: RxStatus.success());
     }, onError: (error) {
-      change(null, status: RxStatus.error());
-    });
-    super.onInit();
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Oops...'),
+          content: Text(error.toString()),
+        ),
+      );
+    }).whenComplete(() => isLoading.value = false);
   }
 
   void changeCity(int? selectedId) {
@@ -59,19 +70,18 @@ class UserProfileController extends GetxController with StateMixin<UserModel> {
       password: passwordController.text.trim(),
     );
 
-    _repository.putUser(userProfileRequest).then(
-      (value) {
-        ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
-          const SnackBar(content: Text('Dados do perfil atualizado')),
-        );
-        passwordController.text = '';
-      },
-      onError: (error) => Get.dialog(
+    _repository.putUser(userProfileRequest).then((value) {
+      ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
+        const SnackBar(content: Text('Dados do perfil atualizado')),
+      );
+      passwordController.text = '';
+    }, onError: (error) {
+      Get.dialog(
         AlertDialog(
           title: Text(error.toString()),
         ),
-      ),
-    );
+      );
+    });
   }
 
   void logout() async {

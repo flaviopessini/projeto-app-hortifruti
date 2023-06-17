@@ -1,9 +1,12 @@
 import 'package:app_hortifruti/app/data/models/store.dart';
+import 'package:app_hortifruti/app/data/services/cart/service.dart';
 import 'package:app_hortifruti/app/modules/store/repository.dart';
 import 'package:get/get.dart';
 
 class StoreController extends GetxController with StateMixin<StoreModel> {
   final StoreRepository _repository;
+
+  bool get showCartButton => Get.find<CartService>().isNotEmpty;
 
   StoreController(this._repository);
 

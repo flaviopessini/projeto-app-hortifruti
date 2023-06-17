@@ -1,15 +1,25 @@
 import 'package:app_hortifruti/app/data/models/order.dart';
+import 'package:app_hortifruti/app/data/services/auth/service.dart';
 import 'package:app_hortifruti/app/modules/order_list/repository.dart';
 import 'package:get/get.dart';
 
-class OrderListControlle extends GetxController
+class OrderListController extends GetxController
     with StateMixin<List<OrderModel>> {
   final OrderListRepository _repository;
+  final _authService = Get.find<AuthService>();
 
-  OrderListControlle(this._repository);
+  OrderListController(this._repository);
 
   @override
   void onInit() {
+    ever(_authService.user, (_) => fetchOrders());
+
+    fetchOrders();
+
+    super.onInit();
+  }
+
+  void fetchOrders() {
     _repository.getOrders().then((data) {
       if (data.isEmpty) {
         change(null, status: RxStatus.empty());
@@ -19,6 +29,5 @@ class OrderListControlle extends GetxController
     }, onError: (error) {
       change(null, status: RxStatus.error(error.toString()));
     });
-    super.onInit();
   }
 }

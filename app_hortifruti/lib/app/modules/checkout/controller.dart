@@ -58,6 +58,9 @@ class CheckoutController extends GetxController {
   void onInit() {
     fetchAddresses();
 
+    // Executa o fetchAddresses() toda vez que o valor da variável `user` for alterado.
+    ever(_authService.user, (_) => fetchAddresses());
+
     super.onInit();
   }
 
@@ -65,11 +68,11 @@ class CheckoutController extends GetxController {
     paymentMethod.value = newPaymentMethod;
   }
 
-  void goToLogin() async {
-    final result = await Get.toNamed(Routes.login);
-    if (result is bool && result == true) {
-      fetchAddresses();
-    }
+  void goToLogin() {
+    Get.toNamed(Routes.login);
+    // if (result is bool && result == true) {
+    //   fetchAddresses();
+    // }
   }
 
   void fetchAddresses() {

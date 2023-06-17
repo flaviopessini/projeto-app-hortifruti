@@ -3,7 +3,7 @@ import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrderListPage extends GetView<OrderListControlle> {
+class OrderListPage extends GetView<OrderListController> {
   const OrderListPage({super.key});
 
   @override

@@ -82,14 +82,13 @@ class UserAddressController extends GetxController
   }
 
   void _add(UserAddressRequestModel address) {
-    _repository.postAddress(address).then(
-      (value) {
-        ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
-            const SnackBar(content: Text('Novo endereço cadastrado')));
+    _repository.postAddress(address).then((value) {
+      ScaffoldMessenger.of(Get.overlayContext!).showSnackBar(
+          const SnackBar(content: Text('Novo endereço cadastrado')));
 
-        Get.back(result: true);
-      },
-      onError: (error) => Get.dialog(
+      Get.back(result: true);
+    }, onError: (error) {
+      Get.dialog(
         AlertDialog(
           actions: [
             TextButton(
@@ -100,19 +99,18 @@ class UserAddressController extends GetxController
           title: const Text('Erro'),
           content: Text(error.toString()),
         ),
-      ),
-    );
+      );
+    });
   }
 
   void _edit(UserAddressRequestModel address) {
-    _repository.putAddress(address).then(
-      (value) {
-        ScaffoldMessenger.of(Get.overlayContext!)
-            .showSnackBar(const SnackBar(content: Text('Endereço atualizado')));
+    _repository.putAddress(address).then((value) {
+      ScaffoldMessenger.of(Get.overlayContext!)
+          .showSnackBar(const SnackBar(content: Text('Endereço atualizado')));
 
-        Get.back(result: true);
-      },
-      onError: (error) => Get.dialog(
+      Get.back(result: true);
+    }, onError: (error) {
+      Get.dialog(
         AlertDialog(
           actions: [
             TextButton(
@@ -123,7 +121,7 @@ class UserAddressController extends GetxController
           title: const Text('Erro'),
           content: Text(error.toString()),
         ),
-      ),
-    );
+      );
+    });
   }
 }

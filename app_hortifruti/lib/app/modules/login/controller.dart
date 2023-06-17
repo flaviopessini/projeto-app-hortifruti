@@ -21,11 +21,12 @@ class LoginController extends GetxController {
       password: passwordController.text.trim(),
     );
     _authService.login(userLogin).then((value) {
-      if (Get.routing.previous == Routes.checkout) {
-        Get.back(result: true);
-      } else {
-        Get.offAllNamed(Routes.dashboard, arguments: 1);
-      }
+      // if (Get.routing.previous == Routes.checkout) {
+      //   Get.back(result: true);
+      // } else {
+      //   Get.offAllNamed(Routes.dashboard, arguments: 1);
+      // }
+      Get.back();
     }, onError: (error) {
       Get.dialog(
         AlertDialog(
