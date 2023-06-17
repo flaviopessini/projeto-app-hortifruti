@@ -10,7 +10,7 @@ export default class extends BaseSeeder {
         nome: `${faker.commerce.department()}_${index}`,
         descricao: faker.lorem.paragraph(),
         ativo: true,
-        posicao: '1',
+        posicao: 1,
         estabelecimentoId: index,
       })
 

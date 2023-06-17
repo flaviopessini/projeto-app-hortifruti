@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.string('nome', 30).notNullable()
       table.string('descricao', 255).nullable()
-      table.string('posicao').notNullable()
+      table.integer('posicao').notNullable().defaultTo(1)
       table.boolean('ativo').notNullable().defaultTo(true)
       table
         .integer('estabelecimento_id')

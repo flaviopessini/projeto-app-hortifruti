@@ -13,7 +13,7 @@ export default class Categoria extends BaseModel {
   public descricao: string | null
 
   @column({ columnName: 'posicao' })
-  public posicao: string
+  public posicao: number
 
   @column({ columnName: 'ativo' })
   public ativo: boolean
