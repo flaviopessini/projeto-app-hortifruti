@@ -14,7 +14,7 @@ export default class EstabelecimentosController {
       .preload('pedidoStatus', (statusQuery) => {
         statusQuery.preload('status')
       })
-      .orderBy('pedido_id', 'desc')
+      .orderBy('id', 'desc')
 
     return response.ok(pedidos)
   }

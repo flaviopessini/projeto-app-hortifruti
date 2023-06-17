@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.integer('pedido_id').unsigned().notNullable().references('id').inTable('pedidos')
       table.integer('status_id').unsigned().notNullable().references('id').inTable('statuses')
       table.string('observacao', 150).nullable()
-      table.timestamp('created_at').notNullable()
+      table.timestamp('created_at').nullable()
     })
   }
 
