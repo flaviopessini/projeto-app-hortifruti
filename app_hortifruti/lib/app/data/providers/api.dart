@@ -53,8 +53,9 @@ class Api extends GetConnect {
     return data;
   }
 
-  Future<List<StoreModel>> getStores() async {
-    final response = _errorHandler(await get('cidades/1/estabelecimentos'));
+  Future<List<StoreModel>> getStores(int cityId) async {
+    final response =
+        _errorHandler(await get('cidades/$cityId/estabelecimentos'));
     List<StoreModel> data = [];
     for (var element in response.body) {
       data.add(StoreModel.fromJson(element));

@@ -1,5 +1,4 @@
 import 'package:app_hortifruti/app/data/models/address.dart';
-import 'package:app_hortifruti/app/data/models/user_address_request.dart';
 import 'package:app_hortifruti/app/modules/user_address_list/repository.dart';
 import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';

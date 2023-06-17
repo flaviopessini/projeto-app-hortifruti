@@ -1,6 +1,5 @@
 import 'package:app_hortifruti/app/data/models/order_product.dart';
 import 'package:app_hortifruti/app/modules/order/controller.dart';
-import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

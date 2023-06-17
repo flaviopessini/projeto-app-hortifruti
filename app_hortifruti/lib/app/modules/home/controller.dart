@@ -1,4 +1,5 @@
 import 'package:app_hortifruti/app/data/models/store.dart';
+import 'package:app_hortifruti/app/data/services/storage/service.dart';
 import 'package:app_hortifruti/app/modules/home/repository.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +10,9 @@ class HomeController extends GetxController with StateMixin<List<StoreModel>> {
 
   @override
   void onInit() {
-    _repository.getStores().then((data) {
+    final int cityId = Get.find<StorageService>().cityId!;
+
+    _repository.getStores(cityId).then((data) {
       if (data.isNotEmpty) {
         change(data, status: RxStatus.success());
       } else {

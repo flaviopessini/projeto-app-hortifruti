@@ -6,7 +6,7 @@ class HomeRepository {
 
   HomeRepository(this._api);
 
-  Future<List<StoreModel>> getStores() async {
-    return await _api.getStores();
+  Future<List<StoreModel>> getStores(int cityId) async {
+    return await _api.getStores(cityId);
   }
 }
