@@ -44,6 +44,12 @@ class Api extends GetConnect {
     return UserLoginResponseModel.fromJson(response.body);
   }
 
+  Future<UserModel> register(UserProfileRequestModel data) async {
+    final response =
+        _errorHandler(await post('cliente/cadastro', jsonEncode(data)));
+    return UserModel.fromJson(response.body);
+  }
+
   Future<List<AddressModel>> getUserAddress() async {
     final response = _errorHandler(await get('enderecos'));
     List<AddressModel> data = [];

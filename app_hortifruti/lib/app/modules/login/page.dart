@@ -1,4 +1,5 @@
 import 'package:app_hortifruti/app/modules/login/controller.dart';
+import 'package:app_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -61,7 +62,7 @@ class LoginPage extends GetView<LoginController> {
                       child: Text('ou'),
                     ),
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.toNamed(Routes.register),
                       child: const Text('Registre-se'),
                     ),
                   ],
