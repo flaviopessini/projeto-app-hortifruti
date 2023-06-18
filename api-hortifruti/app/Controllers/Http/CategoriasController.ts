@@ -25,8 +25,9 @@ export default class CategoriasController {
     const estabelecimento = await Estabelecimento.findByOrFail('user_id', userAuth.id)
 
     const categorias = await Categoria.query()
-      .whereNull('deleted_at')
-      .where('estabelecimento_id', estabelecimento.id)
+      .where('ativo', 1)
+      .orHavingNotNull('created_at')
+      .andWhere('estabelecimento_id', estabelecimento.id)
       .orderBy('posicao', 'asc')
 
     return response.ok(categorias)
@@ -44,7 +45,7 @@ export default class CategoriasController {
 
   public async destroy({ response, params }: HttpContextContract) {
     try {
-      await Categoria.query().where('id', params.id).update({ deletedAt: new Date() })
+      await Categoria.query().where('id', params.id).update({ ativo: false, deletedAt: new Date() })
     } catch {
       return response.badRequest()
     }

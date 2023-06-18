@@ -46,6 +46,7 @@ Route.group(() => {
   Route.post('/pedidos', 'PedidosController.store')
   Route.get('/pedidos', 'PedidosController.index')
   Route.get('/pedidos/:hashId', 'PedidosController.show')
+  Route.post('/pedidos/:hashId/statuses', 'PedidosController.update')
 
   // Rota de estabelecimento autenticado
   Route.get('/estabelecimento/pedidos', 'EstabelecimentosController.pedidos')

@@ -1,3 +1,4 @@
+import { PathPrefixer } from '@adonisjs/core/build/standalone'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import CidadesEstabelecimento from 'App/Models/CidadesEstabelecimento'
@@ -8,7 +9,9 @@ import PedidoEndereco from 'App/Models/PedidoEndereco'
 import PedidoProduto from 'App/Models/PedidoProduto'
 import PedidoStatus from 'App/Models/PedidoStatus'
 import Produto from 'App/Models/Produto'
+import Status from 'App/Models/Status'
 import PedidoValidator from 'App/Validators/PedidoValidator'
+import UpdatePedidoValidator from 'App/Validators/UpdatePedidoValidator'
 var randomstring = require('randomstring')
 
 export default class PedidosController {
@@ -150,5 +153,34 @@ export default class PedidosController {
       await trx.rollback()
       return response.badRequest('Something in the request is wrong: ' + error)
     }
+  }
+
+  public async update({ params, request, response, bouncer }: HttpContextContract) {
+    await bouncer.authorize('UserIsEstabelecimento')
+
+    const payload = await request.validate(UpdatePedidoValidator)
+
+    const pedido = await Pedido.query().where('hash_id', params.hashId).firstOrFail()
+
+    await bouncer.with('PedidoPolicy').authorize('canUpdate', pedido)
+
+    const pedidoStatus = await PedidoStatus.query()
+      .select('status_id')
+      .where('pedido_id', pedido.id)
+      .orderBy('status_id', 'desc')
+      .firstOrFail()
+
+    if (payload.statusId <= pedidoStatus.statusId) {
+      return response.badRequest('O status do pedido não pode ser anterior ao status atual!')
+    }
+
+    const status = await Status.findOrFail(payload.statusId)
+
+    await PedidoStatus.create({
+      pedidoId: pedido.id,
+      statusId: payload.statusId,
+    })
+
+    return response.ok(`Pedido #${pedido.hashId} foi ${status.status}`)
   }
 }
