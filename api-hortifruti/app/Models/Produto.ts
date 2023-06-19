@@ -21,7 +21,7 @@ export default class Produto extends BaseModel {
   public unidade: string
 
   @column({ columnName: 'posicao' })
-  public posicao: string
+  public posicao: number
 
   @column({ columnName: 'ativo' })
   public ativo: boolean

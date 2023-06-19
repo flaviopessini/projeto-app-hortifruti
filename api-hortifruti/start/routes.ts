@@ -46,7 +46,7 @@ Route.group(() => {
   Route.post('/pedidos', 'PedidosController.store')
   Route.get('/pedidos', 'PedidosController.index')
   Route.get('/pedidos/:hashId', 'PedidosController.show')
-  Route.post('/pedidos/:hashId/statuses', 'PedidosController.update')
+  Route.post('/pedidos/:hashId/statuses', 'PedidosController.statuses')
 
   // Rota de estabelecimento autenticado
   Route.get('/estabelecimento/pedidos', 'EstabelecimentosController.pedidos')
@@ -64,6 +64,9 @@ Route.group(() => {
     'update',
     'destroy',
   ])
+
+  // Grupo de rotas para editar pedidos
+  Route.resource('/produtos', 'ProdutosController').only(['store', 'update', 'destroy'])
 }).middleware('auth')
 
 Route.get('/', async () => {

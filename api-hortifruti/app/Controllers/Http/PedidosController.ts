@@ -155,7 +155,7 @@ export default class PedidosController {
     }
   }
 
-  public async update({ params, request, response, bouncer }: HttpContextContract) {
+  public async statuses({ params, request, response, bouncer }: HttpContextContract) {
     await bouncer.authorize('UserIsEstabelecimento')
 
     const payload = await request.validate(UpdatePedidoValidator)
