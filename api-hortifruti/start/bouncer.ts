@@ -61,4 +61,6 @@ export const { actions } = Bouncer.define('UserIsEstabelecimento', (user: User) 
 export const { policies } = Bouncer.registerPolicies({
   PedidoPolicy: () => import('App/Policies/PedidoPolicy'),
   ProdutoPolicy: () => import('App/Policies/ProdutoPolicy'),
+  CategoriaPolicy: () => import('App/Policies/CategoriaPolicy'),
+  ClientePolicy: () => import('App/Policies/ClientePolicy'),
 })

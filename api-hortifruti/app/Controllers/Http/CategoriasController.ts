@@ -43,6 +43,8 @@ export default class CategoriasController {
     const payload = await request.validate(CreateEditCategoriaValidator)
     const categoria = await Categoria.findOrFail(params.id)
 
+    await bouncer.with('CategoriaPolicy').authorize('isOwner', categoria)
+
     categoria.merge(payload)
     await categoria.save()
 
@@ -51,6 +53,10 @@ export default class CategoriasController {
 
   public async destroy({ response, params, bouncer }: HttpContextContract) {
     await bouncer.authorize('UserIsEstabelecimento')
+
+    const categoria = await Categoria.findOrFail(params.id)
+
+    await bouncer.with('CategoriaPolicy').authorize('isOwner', categoria)
 
     try {
       await Categoria.query().where('id', params.id).update({ ativo: false, deletedAt: new Date() })

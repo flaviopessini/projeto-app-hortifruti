@@ -129,7 +129,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nome\": \"Pizzas\"\r\n}",
+									"raw": "{\r\n    \"nome\": \"Pastéis\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -293,6 +293,193 @@
 									],
 									"path": [
 										"estabelecimento"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "produtos",
+					"item": [
+						{
+							"name": "cadastro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nome",
+											"value": "Pastel 01",
+											"type": "text"
+										},
+										{
+											"key": "descricao",
+											"value": "Frango + catupiri + milho",
+											"type": "text"
+										},
+										{
+											"key": "imagem",
+											"type": "file",
+											"src": "/C:/Users/flavi/Pictures/Captura de tela 2023-06-19 145637.png"
+										},
+										{
+											"key": "preco",
+											"value": "14.99",
+											"type": "text"
+										},
+										{
+											"key": "posicao",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "unidade",
+											"value": "un",
+											"type": "default"
+										},
+										{
+											"key": "categoriaId",
+											"value": "21",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/produtos",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"produtos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "editar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nome",
+											"value": "Pastel 01",
+											"type": "text"
+										},
+										{
+											"key": "descricao",
+											"value": "Frango + catupiri + milho",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "imagem",
+											"type": "file",
+											"src": "/C:/Users/flavi/Pictures/Captura de tela 2023-06-19 145637.png",
+											"disabled": true
+										},
+										{
+											"key": "preco",
+											"value": "14.00",
+											"type": "text"
+										},
+										{
+											"key": "posicao",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "unidade",
+											"value": "un",
+											"type": "default"
+										},
+										{
+											"key": "categoriaId",
+											"value": "21",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/produtos/20",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"produtos",
+										"20"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "20",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/produtos/20",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"produtos",
+										"20"
 									]
 								}
 							},
