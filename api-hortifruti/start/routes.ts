@@ -54,6 +54,9 @@ Route.group(() => {
   // Rota para editar dados do cliente
   Route.put('/cliente', 'ClientesController.update')
 
+  // Rota para editar estabelecimento
+  Route.patch('/estabelecimento', 'EstabelecimentosController.update')
+
   // Grupo de rotas para o estabelecimento
   Route.resource('/estabelecimento/categorias', 'CategoriasController').only([
     'store',

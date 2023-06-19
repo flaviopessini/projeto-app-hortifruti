@@ -1,459 +1,761 @@
 {
 	"info": {
-		"_postman_id": "c41fdb12-700c-49e2-a601-735cc38c7fb9",
+		"_postman_id": "3cacc8d6-ca2f-4ce5-89e7-6302a34972eb",
 		"name": "api-hortifruti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "auth",
-			"item": [
-				{
-					"name": "logout",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/logout",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"cliente@email.com\",\r\n    \"password\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/login",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "user info",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/auth/me",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"auth",
-								"me"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "cliente",
-			"item": [
-				{
-					"name": "cadastro",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Cliente 01\",\r\n    \"email\": \"cliente.01@gmail.com\",\r\n    \"telefone\": \"(17) 3333-4444\",\r\n    \"password\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/cliente/cadastro",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"cliente",
-								"cadastro"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "editar",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "MQ.fGHp_NjsmzIlFC5d621Unf9xouISEi7uT_BcS3bV8nOSpQevbDPgxFnIY6Nq",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Cliente 01\",\r\n    \"email\": \"cliente.01@gmail.com\",\r\n    \"telefone\": \"(17) 3333-4444\",\r\n    \"password\": \"87654321\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/cliente",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"cliente"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "cidades",
-			"item": [
-				{
-					"name": "index",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/cidades",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"cidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "estabelecimentos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/cidades/1/estabelecimentos",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"cidades",
-								"1",
-								"estabelecimentos"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "endereços",
-			"item": [
-				{
-					"name": "novo endereço",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cidadeId\": 2,\r\n    \"rua\": \"Rua Rio de Janeiro\",\r\n    \"numero\": \"157\",\r\n    \"bairro\": \"Centro\",\r\n    \"cep\": \"15303-000\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/enderecos",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"enderecos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "index",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/enderecos",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"enderecos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cidadeId\": 1,\r\n    \"rua\": \"Rua Brasil\",\r\n    \"numero\": \"199\",\r\n    \"bairro\": \"Centro\",\r\n    \"cep\": \"15805-001\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/enderecos/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"enderecos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/enderecos/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"enderecos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "pedidos",
-			"item": [
-				{
-					"name": "cadastro",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"estabelecimentoId\": 12,\n    \"meioPagamentoId\": 1,\n    \"trocoPara\": 0,\n    \"observacao\": \"\",\n    \"enderecoId\": 1,\n    \"produtos\": [\n        {\n            \"produtoId\": 1,\n            \"quantidade\": 1,\n            \"observacao\": \"\"\n        }\n    ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/pedidos",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"pedidos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "busca",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/pedidos/NRFNO1XK",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"pedidos",
-								"NRFNO1XK"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "listar",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_cli}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/pedidos",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"pedidos"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "estabelecimentos",
 			"item": [
 				{
-					"name": "estabelecimentos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/estabelecimentos/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"estabelecimentos",
-								"1"
-							]
+					"name": "auth",
+					"item": [
+						{
+							"name": "login estabelecimento",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"estabelecimento_0@email.com\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout estabelecimento",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/logout",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "pedidos",
+					"item": [
+						{
+							"name": "update pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"statusId\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/pedidos/TU8WA2ZT/statuses",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"pedidos",
+										"TU8WA2ZT",
+										"statuses"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "categorias",
+					"item": [
+						{
+							"name": "cadastro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Pizzas\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/estabelecimento/categorias",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento",
+										"categorias"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluir",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/estabelecimento/categorias/20",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento",
+										"categorias",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "editar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Pizzas\",\r\n    \"descricao\": \"Pizzas salgadas\",\r\n    \"posicao\": 1,\r\n    \"ativo\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/estabelecimento/categorias/20",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento",
+										"categorias",
+										"20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/estabelecimento/categorias",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento",
+										"categorias"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "editar",
+					"item": [
+						{
+							"name": "editar estabelecimento",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nome",
+											"value": "Pastelaria Catanduva",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "logo",
+											"type": "file",
+											"src": "/C:/Users/flavi/Pictures/Captura de tela 2023-06-19 135037.png",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "pastelaria_catanduva@email.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/estabelecimento",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "index",
+			"name": "clientes",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "editar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "MQ.fGHp_NjsmzIlFC5d621Unf9xouISEi7uT_BcS3bV8nOSpQevbDPgxFnIY6Nq",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Cliente 01\",\r\n    \"email\": \"cliente.01@gmail.com\",\r\n    \"telefone\": \"(17) 3333-4444\",\r\n    \"password\": \"87654321\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cliente",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cliente"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cadastro",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Cliente 01\",\r\n    \"email\": \"cliente.01@gmail.com\",\r\n    \"telefone\": \"(17) 3333-4444\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/cliente/cadastro",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cliente",
+										"cadastro"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/logout",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"cliente@email.com\",\r\n    \"password\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user info",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/auth/me",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "endereços",
+					"item": [
+						{
+							"name": "novo endereço",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cidadeId\": 1,\r\n    \"rua\": \"Rua Rio de Janeiro\",\r\n    \"numero\": \"157\",\r\n    \"bairro\": \"Centro\",\r\n    \"cep\": \"15303-000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/enderecos",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"enderecos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/enderecos",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"enderecos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cidadeId\": 1,\r\n    \"rua\": \"Rua Brasil\",\r\n    \"numero\": \"199\",\r\n    \"bairro\": \"Centro\",\r\n    \"cep\": \"15805-001\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/enderecos/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"enderecos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/enderecos/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"enderecos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "pedidos",
+					"item": [
+						{
+							"name": "cadastro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"estabelecimentoId\": 1,\n    \"meioPagamentoId\": 1,\n    \"trocoPara\": 0,\n    \"observacao\": \"\",\n    \"enderecoId\": 1,\n    \"produtos\": [\n        {\n            \"produtoId\": 1,\n            \"quantidade\": 1,\n            \"observacao\": \"\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/pedidos",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"pedidos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "busca",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/pedidos/TU8WA2ZT",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"pedidos",
+										"TU8WA2ZT"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_cli}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/pedidos",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"pedidos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "rotas livres",
+			"item": [
+				{
+					"name": "cidades",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/cidades",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "estabelecimentos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/cidades/1/estabelecimentos",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"cidades",
+										"1",
+										"estabelecimentos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "estabelecimentos",
+					"item": [
+						{
+							"name": "estabelecimentos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/estabelecimentos/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimentos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "raiz",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -490,12 +792,17 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://localhost:3333",
+			"value": "http://127.0.0.1:3333",
 			"type": "default"
 		},
 		{
 			"key": "token_cli",
-			"value": "MTA.eIZ0zOBo4obZ0w-IZsFPJhvolQJEYiwmq77QyOFQY26T1Qjs0gim6PD0AvY9",
+			"value": "NA.9gmMeiqn66YTQYIb7iYhH_-UO6-7LfPjCJMpuWu0oQbKqx5BStPXCPVhu21L",
+			"type": "default"
+		},
+		{
+			"key": "token_estabelecimento",
+			"value": "Nw.R_AevhIUOs6WIObK_ErMcGYXDVqFp53KlUrUw2hAzi3A52qDeIYyyBHDhRf8",
 			"type": "default"
 		}
 	]
