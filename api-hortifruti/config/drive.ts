@@ -53,7 +53,9 @@ export default driveConfig({
       | files.
       |
       */
-      root: Application.makePath('uploads'),
+      root: Application.inProduction
+        ? Application.makePath('../uploads')
+        : Application.makePath('uploads'),
 
       /*
       |--------------------------------------------------------------------------

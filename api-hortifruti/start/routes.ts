@@ -66,7 +66,15 @@ Route.group(() => {
   ])
 
   // Grupo de rotas para editar pedidos
-  Route.resource('/produtos', 'ProdutosController').only(['store', 'update', 'destroy'])
+  Route.resource('/estabelecimento/produtos', 'ProdutosController').only([
+    'index',
+    'store',
+    'update',
+    'destroy',
+  ])
+
+  // Rota pra remover somente a imagem do produto
+  Route.delete('/estabelecimento/produtos/:id/imagem', 'ProdutosController.removeImagem')
 }).middleware('auth')
 
 Route.get('/', async () => {
