@@ -484,6 +484,24 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "listar",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/estabelecimentos/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimentos",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
