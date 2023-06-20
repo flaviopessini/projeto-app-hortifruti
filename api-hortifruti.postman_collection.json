@@ -297,6 +297,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "deletar logo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/estabelecimento/logo",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento",
+										"logo"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -364,11 +392,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/produtos",
+									"raw": "{{host}}/estabelecimento/produtos",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"estabelecimento",
 										"produtos"
 									]
 								}
@@ -438,11 +467,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/produtos/20",
+									"raw": "{{host}}/estabelecimento/produtos/20",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"estabelecimento",
 										"produtos",
 										"20"
 									],
@@ -473,11 +503,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/produtos/20",
+									"raw": "{{host}}/estabelecimento/produtos/20",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
+										"estabelecimento",
 										"produtos",
 										"20"
 									]
@@ -498,6 +529,36 @@
 									"path": [
 										"estabelecimentos",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleta imagem",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token_estabelecimento}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/estabelecimento/produtos/1/imagem",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"estabelecimento",
+										"produtos",
+										"1",
+										"imagem"
 									]
 								}
 							},

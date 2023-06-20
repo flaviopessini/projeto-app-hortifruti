@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
+    "build:prod": "node ace build --production && cp .env build/.env && cd build/ && npm install --production && echo '>>>>>>>>>>>>>>>>> ATUALIZE AGORA o PM2 ex: pm2 realod 3 <<<<<<<<<<<<<<<<<'",
     "start": "node server.js",
     "test": "node ace test",
     "lint": "eslint . --ext=.ts",

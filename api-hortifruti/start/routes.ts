@@ -75,6 +75,9 @@ Route.group(() => {
 
   // Rota pra remover somente a imagem do produto
   Route.delete('/estabelecimento/produtos/:id/imagem', 'ProdutosController.removeImagem')
+
+  // Rota pra remover somente a logo do estabelecimento
+  Route.delete('/estabelecimento/logo', 'EstabelecimentosController.removeLogo')
 }).middleware('auth')
 
 Route.get('/', async () => {
