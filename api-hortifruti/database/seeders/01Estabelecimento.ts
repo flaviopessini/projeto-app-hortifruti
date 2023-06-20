@@ -34,7 +34,7 @@ export default class extends BaseSeeder {
 
     let estabelecimentos: Estabelecimento[] = []
 
-    for (let index = 0; index < 20; index++) {
+    for (let index = 0; index < 2; index++) {
       const user = await User.create({
         email: `estabelecimento_${index}@email.com`,
         password: '12345678',
@@ -43,7 +43,6 @@ export default class extends BaseSeeder {
 
       const e = await Estabelecimento.create({
         nome: `Estabelecimento ${index}`,
-        logo: `https://picsum.photos/id/${index}/200/200`,
         bloqueado: false,
         online: false,
         userId: user.id,

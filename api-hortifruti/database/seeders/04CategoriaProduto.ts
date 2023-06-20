@@ -5,7 +5,7 @@ import Produto from 'App/Models/Produto'
 
 export default class extends BaseSeeder {
   public async run() {
-    for (let index = 1; index < 20; index++) {
+    for (let index = 1; index < 3; index++) {
       let categoria = await Categoria.create({
         nome: `${faker.commerce.department()}_${index}`,
         descricao: faker.lorem.paragraph(),
@@ -21,7 +21,7 @@ export default class extends BaseSeeder {
           ativo: true,
           categoriaId: categoria.id,
           descricao: '',
-          posicao: '1',
+          posicao: 1,
           unidade: 'Kg',
           preco: faker.number.float({ min: 2, max: 100 }),
         },
