@@ -29,9 +29,10 @@ export default class CategoriasController {
     const estabelecimento = await Estabelecimento.findByOrFail('user_id', userAuth.id)
 
     const categorias = await Categoria.query()
-      .where('ativo', 1)
-      .orHavingNotNull('created_at')
-      .andWhere('estabelecimento_id', estabelecimento.id)
+      .where('estabelecimento_id', estabelecimento.id)
+      .where(function (query) {
+        query.where('ativo', 1).orWhereNull('deleted_at')
+      })
       .orderBy('posicao', 'asc')
 
     return response.ok(categorias)

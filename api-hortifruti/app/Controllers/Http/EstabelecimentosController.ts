@@ -40,7 +40,8 @@ export default class EstabelecimentosController {
       .where('id', eId)
       .preload('categorias', (categoriaQuery) => {
         categoriaQuery.preload('produtos', (produtoQuery) => {
-          produtoQuery.whereNull('deleted_at')
+          //produtoQuery.whereNull('deleted_at')
+          produtoQuery.where('ativo', 1).orWhereNotNull('deleted_at')
         })
       })
       .preload('meiosPagamentos')
