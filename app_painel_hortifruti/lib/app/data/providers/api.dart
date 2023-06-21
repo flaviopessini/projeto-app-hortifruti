@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:app_painel_hortifruti/app/core/exceptions/exceptions_handlers.dart';
 import 'package:app_painel_hortifruti/app/data/models/address.dart';
 import 'package:app_painel_hortifruti/app/data/models/city.dart';
 import 'package:app_painel_hortifruti/app/data/models/order.dart';
@@ -12,136 +13,163 @@ import 'package:app_painel_hortifruti/app/data/models/user_login_response.dart';
 import 'package:app_painel_hortifruti/app/data/models/user_profile_request.dart';
 import 'package:app_painel_hortifruti/app/data/services/storage/service.dart';
 import 'package:app_painel_hortifruti/config/config.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 
-class Api extends GetConnect {
-  final _storageService = Get.find<StorageService>();
+class Api extends GetxService {
+  late Dio _dio;
 
   @override
   void onInit() {
-    httpClient.baseUrl = Config.ipAddress;
-    httpClient.addRequestModifier((Request request) {
-      request.headers['Accept'] = 'application/json';
-      request.headers['Content-Type'] = 'application/json';
-      return request;
-    });
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: Config.ipAddress,
+        connectTimeout: const Duration(seconds: 5),
+        sendTimeout: const Duration(seconds: 16),
+        receiveTimeout: const Duration(seconds: 10),
+      ),
+    );
 
-    httpClient.addAuthenticator((Request request) {
-      var token = _storageService.token;
-      var headers = {
-        'Authorization': 'Bearer $token',
-      };
-      request.headers.addAll(headers);
-      return request;
-    });
+    _dio.interceptors.add(AppInterceptors(_dio));
 
     super.onInit();
   }
 
   Future<UserLoginResponseModel> login(UserLoginRequestModel data) async {
-    final response = _errorHandler(await post('login', jsonEncode(data)));
-    return UserLoginResponseModel.fromJson(response.body);
+    final response = await _dio.post('login', data: jsonEncode(data));
+    return UserLoginResponseModel.fromJson(response.data);
   }
 
   Future<UserModel> register(UserProfileRequestModel data) async {
     final response =
-        _errorHandler(await post('cliente/cadastro', jsonEncode(data)));
-    return UserModel.fromJson(response.body);
+        await _dio.post('cliente/cadastro', data: jsonEncode(data));
+    return UserModel.fromJson(response.data);
   }
 
   Future<List<AddressModel>> getUserAddress() async {
-    final response = _errorHandler(await get('enderecos'));
+    final response = await _dio.get('enderecos');
     List<AddressModel> data = [];
-    for (var element in response.body) {
+    for (var element in response.data) {
       data.add(AddressModel.fromJson(element));
     }
     return data;
   }
 
   Future<List<StoreModel>> getStores(int cityId) async {
-    final response =
-        _errorHandler(await get('cidades/$cityId/estabelecimentos'));
+    final response = await _dio.get('cidades/$cityId/estabelecimentos');
     List<StoreModel> data = [];
-    for (var element in response.body) {
+    for (var element in response.data) {
       data.add(StoreModel.fromJson(element));
     }
     return data;
   }
 
   Future<StoreModel?> getStore(int id) async {
-    final response = _errorHandler(await get('estabelecimentos/$id'));
-    final data = StoreModel.fromJson(response.body);
+    final response = await _dio.get('estabelecimentos/$id');
+    final data = StoreModel.fromJson(response.data);
     return data;
   }
 
   Future<UserModel> getUser() async {
-    final response = _errorHandler(await get('auth/me'));
-    return UserModel.fromJson(response.body);
+    final response = await _dio.get('auth/me');
+    return UserModel.fromJson(response.data);
   }
 
   Future<UserModel> putUser(UserProfileRequestModel data) async {
-    final response = _errorHandler(await put('cliente', jsonEncode(data)));
-    return UserModel.fromJson(response.body);
+    final response = await _dio.put('cliente', data: jsonEncode(data));
+    return UserModel.fromJson(response.data);
   }
 
   Future<List<CityModel>> getCities() async {
-    final response = _errorHandler(await get('cidades'));
+    final response = await _dio.get('cidades');
     List<CityModel> data = [];
-    for (var city in response.body) {
+    for (var city in response.data) {
       data.add(CityModel.fromJson(city));
     }
     return data;
   }
 
   Future<void> postAddress(UserAddressRequestModel data) async {
-    _errorHandler(await post('enderecos', jsonEncode(data)));
+    await _dio.post('enderecos', data: jsonEncode(data));
   }
 
   Future<void> putAddress(UserAddressRequestModel data) async {
-    _errorHandler(await put('enderecos/${data.id}', jsonEncode(data)));
+    await _dio.put('enderecos/${data.id}', data: jsonEncode(data));
   }
 
   Future<void> deleteAddress(int id) async {
-    _errorHandler(await delete('enderecos/$id'));
+    await _dio.delete('enderecos/$id');
   }
 
   Future<void> postOrder(data) async {
-    _errorHandler(await post('pedidos', jsonEncode(data)));
+    await _dio.post('pedidos', data: jsonEncode(data));
   }
 
   Future<List<OrderModel>> getOrders() async {
-    final response = _errorHandler(await get('pedidos'));
+    final response = await _dio.get('pedidos');
     List<OrderModel> data = [];
-    for (var o in response.body) {
+    for (var o in response.data) {
       data.add(OrderModel.fromJson(o));
     }
     return data;
   }
 
   Future<OrderModel> getOrder(String hashId) async {
-    final response = _errorHandler(await get('pedidos/$hashId'));
-    return OrderModel.fromJson(response.body);
+    final response = await _dio.get('pedidos/$hashId');
+    return OrderModel.fromJson(response.data);
+  }
+}
+
+class AppInterceptors extends Interceptor {
+  final Dio dio;
+  final _storageService = Get.find<StorageService>();
+
+  AppInterceptors(this.dio);
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final accessToken = _storageService.token;
+    if (accessToken != null) {
+      options.headers['Authorization'] = 'Bearer $accessToken';
+    }
+    //handler.next(options);
+    super.onRequest(options, handler);
   }
 
-  Response _errorHandler(Response response) {
-    log(response.bodyString.toString());
-
-    if (response.status.connectionError) {
-      log('Erro de conexão com o serviço!');
-      throw 'Erro de conexão com o serviço!';
-    }
-
-    switch (response.statusCode) {
-      case 200:
-      case 201:
-      case 202:
-      case 204:
-        return response;
-      case 422:
-        throw response.body['errors'].first['message'];
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    switch (err.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+        throw DeadlineExceededException(err.requestOptions);
+      case DioExceptionType.badResponse:
+        switch (err.response?.statusCode) {
+          case 400:
+            throw BadRequestException(err.requestOptions);
+          case 401:
+            throw UnauthorizedException(err.requestOptions);
+          case 404:
+            throw NotFoundException(err.requestOptions);
+          case 409:
+            throw ConflictException(err.requestOptions);
+          case 422:
+            throw UnprocessableEntity(err.requestOptions, err.response);
+          case 500:
+            throw InternalServerErrorException(err.requestOptions);
+        }
+        break;
+      case DioExceptionType.cancel:
+        break;
+      case DioExceptionType.connectionError:
+        throw ConnectionException(err.requestOptions);
+      case DioExceptionType.unknown:
+        throw UnknownErrorException(err.requestOptions);
       default:
-        throw 'Ocorreu um erro inesperado';
+        break;
     }
+
+    //handler.next(err);
+    super.onError(err, handler);
   }
 }
