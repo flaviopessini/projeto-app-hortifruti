@@ -1,6 +1,6 @@
-import 'package:app_hortifruti/app/modules/store/controller.dart';
-import 'package:app_hortifruti/app/routes/routes.dart';
-import 'package:app_hortifruti/app/widgets/store_status.dart';
+import 'package:app_painel_hortifruti/app/modules/store/controller.dart';
+import 'package:app_painel_hortifruti/app/routes/routes.dart';
+import 'package:app_painel_hortifruti/app/widgets/store_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -32,7 +32,7 @@ class StorePage extends GetView<StoreController> {
                         child: state!.image != null
                             ? FadeInImage.memoryNetwork(
                                 placeholder: kTransparentImage,
-                                image: state!.image!,
+                                image: state.image!,
                               )
                             : null,
                       ),
@@ -90,6 +90,9 @@ class StorePage extends GetView<StoreController> {
                                     child: FadeInImage.memoryNetwork(
                                       placeholder: kTransparentImage,
                                       image: product.image,
+                                      imageErrorBuilder:
+                                          (context, error, stackTrace) =>
+                                              const Placeholder(),
                                     ),
                                   ),
                                 )
@@ -117,7 +120,7 @@ class StorePage extends GetView<StoreController> {
         () {
           if (controller.showCartButton) {
             return FloatingActionButton(
-              onPressed: () => Get.toNamed(Routes.cart),
+              onPressed: () {},
               tooltip: 'Carrinho',
               child: const Icon(Icons.shopping_cart_rounded),
             );

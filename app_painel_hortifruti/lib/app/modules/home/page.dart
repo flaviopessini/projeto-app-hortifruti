@@ -1,6 +1,6 @@
-import 'package:app_hortifruti/app/modules/home/controller.dart';
-import 'package:app_hortifruti/app/routes/routes.dart';
-import 'package:app_hortifruti/app/widgets/store_status.dart';
+import 'package:app_painel_hortifruti/app/modules/home/controller.dart';
+import 'package:app_painel_hortifruti/app/routes/routes.dart';
+import 'package:app_painel_hortifruti/app/widgets/store_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -14,13 +14,6 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Hortifruti'),
-        actions: [
-          IconButton(
-            onPressed: () => Get.toNamed(Routes.selectCity),
-            icon: const Icon(Icons.location_pin),
-            tooltip: 'Selecionar a cidade',
-          ),
-        ],
       ),
       body: SafeArea(
         child: controller.obx(

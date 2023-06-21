@@ -1,6 +1,6 @@
-import 'package:app_hortifruti/app/data/models/category.dart';
-import 'package:app_hortifruti/app/data/models/payment_method.dart';
-import 'package:app_hortifruti/app/data/models/shipping_by_city.dart';
+import 'package:app_painel_hortifruti/app/data/models/category.dart';
+import 'package:app_painel_hortifruti/app/data/models/payment_method.dart';
+import 'package:app_painel_hortifruti/app/data/models/shipping_by_city.dart';
 
 class StoreModel {
   int id;
