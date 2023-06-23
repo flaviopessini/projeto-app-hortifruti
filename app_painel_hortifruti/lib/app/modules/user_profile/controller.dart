@@ -41,7 +41,7 @@ class UserProfileController extends GetxController {
     _repository.getUser().then((data) {
       nameController.text = data.name;
       emailController.text = data.email;
-      phoneController.text = data.phone;
+      phoneController.text = data.phone ?? '';
     }, onError: (error) {
       Get.dialog(
         AlertDialog(

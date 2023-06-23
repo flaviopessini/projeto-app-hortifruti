@@ -25,13 +25,14 @@ class OrderPage extends GetView<OrderController> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      state!.store.name,
+                      //state!.store.name,
+                      'Texto',
                       style: Get.textTheme.headlineMedium,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('#${state.hashId}'),
+                        Text('#${state!.hashId}'),
                         Text(DateFormat("dd/MM/y 'às' HH:mm")
                             .format(state.createdAt)),
                       ],

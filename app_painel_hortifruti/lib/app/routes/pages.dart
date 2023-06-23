@@ -52,9 +52,8 @@ class RedirectMiddleware extends GetMiddleware {
   /// para a tela de selecionar cidade antes de prosseguir.
   @override
   RouteSettings? redirect(String? route) {
-    // return Get.find<StorageService>().cityId != null
-    //     ? null
-    //     : const RouteSettings(name: Routes.selectCity);
-    return null;
+    return Get.find<StorageService>().token != null
+        ? null
+        : const RouteSettings(name: Routes.login);
   }
 }

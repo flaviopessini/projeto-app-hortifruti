@@ -6,7 +6,6 @@ import 'package:app_painel_hortifruti/app/data/models/store.dart';
 
 class OrderModel {
   String hashId;
-  StoreModel store;
   num value;
   num deliveryCost;
   String? observation;
@@ -18,7 +17,6 @@ class OrderModel {
 
   OrderModel({
     required this.hashId,
-    required this.store,
     required this.value,
     required this.deliveryCost,
     required this.createdAt,
@@ -31,7 +29,6 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
         hashId: json['hash_id'],
-        store: StoreModel.fromJson(json['estabelecimento']),
         value: num.parse(json['valor']),
         deliveryCost: num.parse(json['custo_entrega']),
         statusList: json['pedidoStatus'] == null

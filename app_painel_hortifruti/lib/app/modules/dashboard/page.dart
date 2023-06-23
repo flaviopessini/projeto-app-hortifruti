@@ -68,12 +68,12 @@ class DashboardPage extends GetResponsiveView<DashboardController> {
             NavigationDestination(
               icon: Icon(Icons.person_outlined),
               selectedIcon: Icon(Icons.person),
-              label: 'Meu Perfil',
+              label: 'Produtos',
             ),
             NavigationDestination(
               icon: Icon(Icons.view_list_outlined),
               selectedIcon: Icon(Icons.view_list),
-              label: 'Meus Pedidos',
+              label: 'Configurar',
             ),
           ],
         ),
@@ -85,9 +85,9 @@ class DashboardPage extends GetResponsiveView<DashboardController> {
     return IndexedStack(
       index: controller.currentPageIndex.value,
       children: const [
+        OrderListPage(),
         HomePage(),
         UserProfilePage(),
-        OrderListPage(),
       ],
     );
   }

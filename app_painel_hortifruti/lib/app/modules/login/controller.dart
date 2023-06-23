@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
+  final isLoading = RxBool(false);
   final _authService = Get.find<AuthService>();
 
   final formKey = GlobalKey<FormState>();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var emailController =
+      TextEditingController(text: 'pastelaria_catanduva@email.com');
+  var passwordController = TextEditingController(text: '12345678');
 
   void login() {
+    isLoading.value = true;
     Get.focusScope!.unfocus();
     if (!formKey.currentState!.validate()) {
       return;
@@ -21,13 +24,10 @@ class LoginController extends GetxController {
       password: passwordController.text.trim(),
     );
     _authService.login(userLogin).then((value) {
-      // if (Get.routing.previous == Routes.checkout) {
-      //   Get.back(result: true);
-      // } else {
-      //   Get.offAllNamed(Routes.dashboard, arguments: 1);
-      // }
-      Get.back();
+      isLoading.value = false;
+      Get.offAllNamed(Routes.dashboard);
     }, onError: (error) {
+      isLoading.value = false;
       Get.dialog(
         AlertDialog(
           title: const Text('Ocorreu um erro'),
