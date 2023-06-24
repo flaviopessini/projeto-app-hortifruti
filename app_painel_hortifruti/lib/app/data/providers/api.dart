@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:app_painel_hortifruti/app/core/exceptions/exceptions_handlers.dart';
 import 'package:app_painel_hortifruti/app/data/models/address.dart';

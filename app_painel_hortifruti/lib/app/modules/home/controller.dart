@@ -1,5 +1,4 @@
 import 'package:app_painel_hortifruti/app/data/models/store.dart';
-import 'package:app_painel_hortifruti/app/data/services/storage/service.dart';
 import 'package:app_painel_hortifruti/app/modules/home/repository.dart';
 import 'package:get/get.dart';
 

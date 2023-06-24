@@ -2,7 +2,6 @@ import 'package:app_painel_hortifruti/app/data/models/address.dart';
 import 'package:app_painel_hortifruti/app/data/models/order_product.dart';
 import 'package:app_painel_hortifruti/app/data/models/order_status.dart';
 import 'package:app_painel_hortifruti/app/data/models/payment_method.dart';
-import 'package:app_painel_hortifruti/app/data/models/store.dart';
 
 class OrderModel {
   String hashId;

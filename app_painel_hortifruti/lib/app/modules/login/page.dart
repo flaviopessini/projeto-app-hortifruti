@@ -1,5 +1,4 @@
 import 'package:app_painel_hortifruti/app/modules/login/controller.dart';
-import 'package:app_painel_hortifruti/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

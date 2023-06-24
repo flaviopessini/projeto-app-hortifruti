@@ -19,7 +19,7 @@ class DashboardPage extends GetResponsiveView<DashboardController> {
               selectedIndex: controller.currentPageIndex.value,
               groupAlignment: -1,
               labelType: NavigationRailLabelType.all,
-              leading: FlutterLogo(
+              leading: const FlutterLogo(
                 size: 48,
                 style: FlutterLogoStyle.stacked,
               ),
@@ -84,10 +84,10 @@ class DashboardPage extends GetResponsiveView<DashboardController> {
   IndexedStack _buildBody() {
     return IndexedStack(
       index: controller.currentPageIndex.value,
-      children: const [
+      children: [
         OrderListPage(),
-        HomePage(),
-        UserProfilePage(),
+        const HomePage(),
+        const UserProfilePage(),
       ],
     );
   }
