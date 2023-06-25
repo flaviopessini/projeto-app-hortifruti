@@ -19,15 +19,19 @@ class OrderListWidget extends StatelessWidget {
         shrinkWrap: true,
         children: [
           for (var order in state!)
-            ListTile(
-              title: Text('# ${order.hashId.toString()}'),
-              subtitle:
-                  Text(DateFormat("dd/MM/y HH:mm").format(order.createdAt)),
-              trailing: Chip(
-                label: Text(order.statusList.last.name),
-              ),
-              onTap: () => onItemSelected(order),
-            ),
+            Obx(() => ListTile(
+                  title: Text('# ${order.hashId.toString()}'),
+                  subtitle:
+                      Text(DateFormat("dd/MM/y HH:mm").format(order.createdAt)),
+                  trailing: Chip(
+                    label: Text(order.statusList.last.name),
+                    elevation: 5.0,
+                  ),
+                  onTap: () => onItemSelected(order),
+                  selected: controller.orderSelected.value == order.hashId
+                      ? true
+                      : false,
+                )),
         ],
       ),
       onEmpty: const Center(

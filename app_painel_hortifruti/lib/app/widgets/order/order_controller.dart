@@ -1,5 +1,7 @@
 import 'package:app_painel_hortifruti/app/data/models/order.dart';
-import 'package:app_painel_hortifruti/app/modules/order/repository.dart';
+import 'package:app_painel_hortifruti/app/modules/order_list/controller.dart';
+import 'package:app_painel_hortifruti/app/widgets/order/order_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderController extends GetxController with StateMixin<OrderModel> {
@@ -28,6 +30,22 @@ class OrderController extends GetxController with StateMixin<OrderModel> {
       change(data, status: RxStatus.success());
     }, onError: (error) {
       change(null, status: RxStatus.error(error.toString()));
+    });
+  }
+
+  Future<void> onSendStatus(int statusId) async {
+    await _repository.postOrderStatus(hashId.value!, statusId).then((_) {
+      Get.find<OrderListController>().fetchOrders();
+    }, onError: (error) {
+      Get.dialog(
+        AlertDialog(
+          title: Text(
+            error.toString(),
+          ),
+        ),
+      );
+    }).whenComplete(() async {
+      await loadOrder();
     });
   }
 }

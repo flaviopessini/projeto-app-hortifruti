@@ -1,6 +1,7 @@
 import 'package:app_painel_hortifruti/app/data/models/order.dart';
 import 'package:app_painel_hortifruti/app/data/models/order_product.dart';
 import 'package:app_painel_hortifruti/app/widgets/order/order_controller.dart';
+import 'package:app_painel_hortifruti/app/widgets/order_next_status/order_next_status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -52,6 +53,10 @@ class OrderWidget extends StatelessWidget {
                   Text(DateFormat.Hm().format(s.createdAt)),
                 ],
               ),
+            OrderNextStatusWidget(
+              order.statusList.last,
+              controller.onSendStatus,
+            ),
             const SizedBox(height: 16.0),
             Text(
               'Produtos',

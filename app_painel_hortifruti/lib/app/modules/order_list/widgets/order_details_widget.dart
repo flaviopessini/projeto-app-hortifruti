@@ -1,5 +1,5 @@
 import 'package:app_painel_hortifruti/app/data/providers/api.dart';
-import 'package:app_painel_hortifruti/app/modules/order/repository.dart';
+import 'package:app_painel_hortifruti/app/widgets/order/order_repository.dart';
 import 'package:app_painel_hortifruti/app/modules/order_list/controller.dart';
 import 'package:app_painel_hortifruti/app/widgets/order/order_controller.dart';
 import 'package:app_painel_hortifruti/app/widgets/order/order_widget.dart';

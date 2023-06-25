@@ -21,8 +21,8 @@ class OrderListController extends GetxController
     super.onInit();
   }
 
-  void fetchOrders() {
-    _repository.getOrders().then((data) {
+  Future<void> fetchOrders() async {
+    await _repository.getOrders().then((data) {
       if (data.isEmpty) {
         change(null, status: RxStatus.empty());
       } else {

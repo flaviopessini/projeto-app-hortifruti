@@ -7,4 +7,7 @@ class OrderRepository {
   OrderRepository(this._api);
 
   Future<OrderModel> getOrder(String hashId) => _api.getOrder(hashId);
+
+  Future<void> postOrderStatus(String id, int statusId) =>
+      _api.postOrderStatus(id, statusId);
 }

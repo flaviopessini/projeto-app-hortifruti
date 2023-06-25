@@ -104,6 +104,13 @@ class Api extends GetxService {
     await _dio.post('pedidos', data: jsonEncode(data));
   }
 
+  Future<void> postOrderStatus(String id, int statusId) async {
+    await _dio.post(
+      'pedidos/$id/statuses',
+      data: jsonEncode({'statusId': statusId}),
+    );
+  }
+
   Future<List<OrderModel>> getOrders() async {
     final response = await _dio.get('estabelecimento/pedidos');
     List<OrderModel> data = [];
