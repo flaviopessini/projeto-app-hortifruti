@@ -16,6 +16,12 @@ class CategoryListPage extends GetResponsiveView<CategoryListController> {
       appBar: AppBar(
         backgroundColor: Get.theme.colorScheme.inversePrimary,
         title: const Text(_pageTitle),
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.product),
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Row(
@@ -46,6 +52,12 @@ class CategoryListPage extends GetResponsiveView<CategoryListController> {
       appBar: AppBar(
         backgroundColor: Get.theme.colorScheme.inversePrimary,
         title: const Text(_pageTitle),
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.product),
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: SafeArea(
         child: CategoryListWidget(

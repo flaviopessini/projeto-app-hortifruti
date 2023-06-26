@@ -32,7 +32,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.product,
-      page: () => const ProductPage(),
+      page: () => ProductPage(),
       binding: ProductBinding(),
     ),
     GetPage(
