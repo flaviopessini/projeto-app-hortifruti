@@ -38,6 +38,9 @@ class ProductController extends GetxController {
       unitOfMeasure.value = product.value!.unitOfMeasure;
       categoryId.value = product.value!.categoryId;
       currentImage.value = product.value!.image;
+    } else if (Get.parameters['categoryId'] != null &&
+        Get.parameters['categoryId']!.isNotEmpty) {
+      categoryId.value = int.parse(Get.parameters['categoryId']!);
     }
 
     super.onInit();

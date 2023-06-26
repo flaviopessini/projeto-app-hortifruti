@@ -18,7 +18,15 @@ class CategoryListPage extends GetResponsiveView<CategoryListController> {
         title: const Text(_pageTitle),
         actions: [
           IconButton(
-            onPressed: () => Get.toNamed(Routes.product),
+            onPressed: () {
+              if (controller.categorySelected.value != null) {
+                Get.toNamed(Routes.product, parameters: {
+                  'categoryId': controller.categorySelected.value.toString(),
+                });
+              } else {
+                Get.toNamed(Routes.product);
+              }
+            },
             icon: const Icon(Icons.add),
           ),
         ],
