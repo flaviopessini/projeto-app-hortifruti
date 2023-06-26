@@ -122,6 +122,29 @@ class ProductPage extends GetResponsiveView<ProductController> {
               )
             ],
           ),
+          Obx(
+            () => DropdownButtonFormField(
+              value: controller.categoryId.value,
+              items: controller.categoryList
+                  .map(
+                    (element) => DropdownMenuItem(
+                      value: element.id,
+                      child: Text(element.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: controller.changeCategory,
+              decoration: const InputDecoration(
+                labelText: 'Categoria',
+              ),
+              validator: (value) {
+                if (value == null) {
+                  return 'Selecione uma categoria';
+                }
+                return null;
+              },
+            ),
+          ),
         ],
       ),
     );
