@@ -1,4 +1,6 @@
 import 'package:app_painel_hortifruti/app/data/services/storage/service.dart';
+import 'package:app_painel_hortifruti/app/modules/category/binding.dart';
+import 'package:app_painel_hortifruti/app/modules/category/page.dart';
 import 'package:app_painel_hortifruti/app/modules/dashboard/binding.dart';
 import 'package:app_painel_hortifruti/app/modules/dashboard/page.dart';
 import 'package:app_painel_hortifruti/app/modules/login/binding.dart';
@@ -42,6 +44,11 @@ abstract class AppPages {
       name: Routes.order,
       page: () => const OrderPage(),
       binding: OrderBinding(),
+    ),
+    GetPage(
+      name: Routes.category,
+      page: () => const CategoryPage(),
+      binding: CategoryBinding(),
     ),
   ];
 }

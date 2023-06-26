@@ -42,10 +42,6 @@ class UserProfilePage extends GetView<UserProfileController> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: const Text('Meus endereços'),
-                  ),
                   Form(
                     key: controller.formKey,
                     child: Column(

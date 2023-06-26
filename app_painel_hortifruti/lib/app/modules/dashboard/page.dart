@@ -1,5 +1,5 @@
+import 'package:app_painel_hortifruti/app/modules/category_list/page.dart';
 import 'package:app_painel_hortifruti/app/modules/dashboard/controller.dart';
-import 'package:app_painel_hortifruti/app/modules/home/page.dart';
 import 'package:app_painel_hortifruti/app/modules/order_list/page.dart';
 import 'package:app_painel_hortifruti/app/modules/user_profile/page.dart';
 import 'package:flutter/material.dart';
@@ -66,13 +66,13 @@ class DashboardPage extends GetResponsiveView<DashboardController> {
               label: 'Início',
             ),
             NavigationDestination(
-              icon: Icon(Icons.person_outlined),
-              selectedIcon: Icon(Icons.person),
+              icon: Icon(Icons.view_list_outlined),
+              selectedIcon: Icon(Icons.view_list),
               label: 'Produtos',
             ),
             NavigationDestination(
-              icon: Icon(Icons.view_list_outlined),
-              selectedIcon: Icon(Icons.view_list),
+              icon: Icon(Icons.settings_outlined),
+              selectedIcon: Icon(Icons.settings),
               label: 'Configurar',
             ),
           ],
@@ -86,7 +86,7 @@ class DashboardPage extends GetResponsiveView<DashboardController> {
       index: controller.currentPageIndex.value,
       children: [
         OrderListPage(),
-        const HomePage(),
+        CategoryListPage(),
         const UserProfilePage(),
       ],
     );

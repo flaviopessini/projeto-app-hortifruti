@@ -116,19 +116,6 @@ class StorePage extends GetView<StoreController> {
           ],
         ),
       ),
-      floatingActionButton: Obx(
-        () {
-          if (controller.showCartButton) {
-            return FloatingActionButton(
-              onPressed: () {},
-              tooltip: 'Carrinho',
-              child: const Icon(Icons.shopping_cart_rounded),
-            );
-          } else {
-            return Container();
-          }
-        },
-      ),
     );
   }
 }
