@@ -82,21 +82,22 @@ class StorePage extends GetView<StoreController> {
                       ),
                       for (var product in category.products)
                         ListTile(
-                          leading: product.image.isNotEmpty
-                              ? SizedBox(
-                                  width: 56.0,
-                                  height: 56.0,
-                                  child: ClipRRect(
-                                    child: FadeInImage.memoryNetwork(
-                                      placeholder: kTransparentImage,
-                                      image: product.image,
-                                      imageErrorBuilder:
-                                          (context, error, stackTrace) =>
-                                              const Placeholder(),
-                                    ),
-                                  ),
-                                )
-                              : null,
+                          leading:
+                              product.image != null && product.image!.isNotEmpty
+                                  ? SizedBox(
+                                      width: 56.0,
+                                      height: 56.0,
+                                      child: ClipRRect(
+                                        child: FadeInImage.memoryNetwork(
+                                          placeholder: kTransparentImage,
+                                          image: product.image!,
+                                          imageErrorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Placeholder(),
+                                        ),
+                                      ),
+                                    )
+                                  : null,
                           title: Text(
                             product.name,
                           ),

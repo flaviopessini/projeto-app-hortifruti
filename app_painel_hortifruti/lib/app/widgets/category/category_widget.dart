@@ -19,14 +19,14 @@ class CategoryWidget extends StatelessWidget {
         children: [
           for (var product in state!)
             ListTile(
-              leading: product.image.isNotEmpty
+              leading: product.image != null && product.image!.isNotEmpty
                   ? SizedBox(
                       width: 56.0,
                       height: 56.0,
                       child: ClipRRect(
                         child: FadeInImage.memoryNetwork(
                           placeholder: kTransparentImage,
-                          image: product.image,
+                          image: product.image!,
                           imageErrorBuilder: (context, error, stackTrace) =>
                               const Placeholder(),
                         ),

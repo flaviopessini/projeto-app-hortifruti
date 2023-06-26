@@ -7,6 +7,7 @@ import 'package:app_painel_hortifruti/app/data/models/category_request.dart';
 import 'package:app_painel_hortifruti/app/data/models/city.dart';
 import 'package:app_painel_hortifruti/app/data/models/order.dart';
 import 'package:app_painel_hortifruti/app/data/models/product.dart';
+import 'package:app_painel_hortifruti/app/data/models/product_request.dart';
 import 'package:app_painel_hortifruti/app/data/models/store.dart';
 import 'package:app_painel_hortifruti/app/data/models/user.dart';
 import 'package:app_painel_hortifruti/app/data/models/user_address_request.dart';
@@ -16,7 +17,8 @@ import 'package:app_painel_hortifruti/app/data/models/user_profile_request.dart'
 import 'package:app_painel_hortifruti/app/data/services/storage/service.dart';
 import 'package:app_painel_hortifruti/config/config.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/instance_manager.dart';
 
 class Api extends GetxService {
   late Dio _dio;
@@ -146,6 +148,48 @@ class Api extends GetxService {
       data.add(CategoryModel.fromJson(o));
     }
     return data;
+  }
+
+  Future<ProductModel> postProduct(ProductRequestModel data) async {
+    final formData = FormData.fromMap(data.toJson());
+
+    final image = data.image;
+    if (image != null) {
+      formData.files.add(
+        MapEntry(
+          'imagem',
+          MultipartFile.fromBytes(
+            image.bytes!,
+            filename: image.name,
+          ),
+        ),
+      );
+    }
+
+    final response =
+        await _dio.post('estabelecimento/produtos', data: formData);
+    return ProductModel.fromJson(response.data['produto']);
+  }
+
+  Future<ProductModel> putProduct(ProductRequestModel data) async {
+    final formData = FormData.fromMap(data.toJson());
+
+    final image = data.image;
+    if (image != null) {
+      formData.files.add(
+        MapEntry(
+          'imagem',
+          MultipartFile.fromBytes(
+            image.bytes!,
+            filename: image.name,
+          ),
+        ),
+      );
+    }
+
+    final response =
+        await _dio.put('estabelecimento/produtos/${data.id}', data: formData);
+    return ProductModel.fromJson(response.data['produto']);
   }
 
   Future<List<ProductModel>> getProducts(int categoryId) async {

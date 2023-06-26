@@ -1,6 +1,7 @@
 import 'package:app_painel_hortifruti/app/modules/product/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProductPage extends GetResponsiveView<ProductController> {
   ProductPage({super.key});
@@ -10,7 +11,9 @@ class ProductPage extends GetResponsiveView<ProductController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Get.theme.colorScheme.inversePrimary,
-        title: const Text('Novo produto'),
+        title: Text(controller.product.value == null
+            ? 'Novo produto'
+            : 'Editar produto'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -55,16 +58,25 @@ class ProductPage extends GetResponsiveView<ProductController> {
   Padding _buildSubmit() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ElevatedButton.icon(
-        onPressed: () => controller.onAdd,
-        icon: const Icon(Icons.check_rounded),
-        label: const Text('Salvar'),
+      child: Obx(
+        () => controller.isLoading.isTrue
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ElevatedButton.icon(
+                onPressed: controller.isEditing.isFalse
+                    ? controller.onAdd
+                    : controller.onUpdate,
+                icon: const Icon(Icons.check_rounded),
+                label: const Text('Salvar'),
+              ),
       ),
     );
   }
 
   Form _buildForm() {
     return Form(
+      key: controller.formKey,
       child: Column(
         children: [
           TextFormField(
@@ -85,7 +97,7 @@ class ProductPage extends GetResponsiveView<ProductController> {
               labelText: 'Descrição',
             ),
             minLines: 1,
-            maxLength: 3,
+            maxLines: 3,
           ),
           Row(
             children: [
@@ -115,9 +127,8 @@ class ProductPage extends GetResponsiveView<ProductController> {
                         ),
                       )
                       .toList(),
-                  onChanged: (value) {
-                    //
-                  },
+                  value: controller.unitOfMeasure.value,
+                  onChanged: controller.changeUnitOfMeasure,
                 ),
               )
             ],
@@ -168,6 +179,19 @@ class ProductPage extends GetResponsiveView<ProductController> {
             if (controller.image.value != null) {
               return _buildProductImage(
                   Image.memory(controller.image.value!.bytes!));
+            }
+
+            if (controller.currentImage.value?.isNotEmpty ?? false) {
+              return Column(
+                children: [
+                  _buildProductImage(
+                    FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: controller.currentImage.value!,
+                    ),
+                  ),
+                ],
+              );
             }
 
             return const SizedBox();
