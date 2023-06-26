@@ -145,6 +145,11 @@ class ProductPage extends GetResponsiveView<ProductController> {
               },
             ),
           ),
+          const SizedBox(height: 8.0),
+          OutlinedButton(
+            onPressed: controller.goToNewCategory,
+            child: const Text('Nova categoria'),
+          ),
         ],
       ),
     );
