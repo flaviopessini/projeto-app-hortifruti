@@ -201,6 +201,10 @@ class Api extends GetxService {
     }
     return data;
   }
+
+  Future<void> deleteProductImage(int productId) async {
+    await _dio.delete('estabelecimento/produtos/$productId/imagem');
+  }
 }
 
 class AppInterceptors extends Interceptor {
